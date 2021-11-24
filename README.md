@@ -5,7 +5,7 @@ To call the program, you should type:
 
 `./pipex <infile> <cmd1> <cmd2> <outfile>`
 
-This should work the same way as the following shell command:
+The program should work the same way as the following shell command:
 
 `< infile cmd1 | cmd2 > outfile`
 
