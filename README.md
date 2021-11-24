@@ -1,5 +1,5 @@
 # 42_pipex
-The aim of this project is to understand how pipes and redirections works. To do that, the program must receive file names and commands as arguments and execute it as follows
+The aim of this project is to understand how pipes and redirections works. To do that, the program must receive file names and commands as arguments and execute it in a certain order.
 
 `./pipex <infile> <cmd1> <cmd2> <outfile>`
 
