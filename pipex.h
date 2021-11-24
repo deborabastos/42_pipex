@@ -6,7 +6,7 @@
 /*   By: dalves-p <dalves-p@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/23 16:29:46 by dalves-p          #+#    #+#             */
-/*   Updated: 2021/11/23 16:42:40 by dalves-p         ###   ########.fr       */
+/*   Updated: 2021/11/23 16:44:54 by dalves-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,5 @@
 # include <sys/wait.h> // wait, waitpid
 # include <errno.h> // perror
 # include <string.h> // strerror
-
 
 #endif
