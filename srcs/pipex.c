@@ -6,7 +6,7 @@
 /*   By: dalves-p <dalves-p@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/23 16:29:11 by dalves-p          #+#    #+#             */
-/*   Updated: 2021/11/24 16:23:45 by dalves-p         ###   ########.fr       */
+/*   Updated: 2021/12/02 22:23:06 by dalves-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,23 @@
 // executar segundo comando
 // gravar output no segundo arquivo
 
-int	main(int argc, char **argv)
+int	parsing(char *argv[], char *envp[])
 {
-	 
+	while (*argv)
+	{
+		printf("%s\n", argv[0]);
+		argv++;
+	}
+	while (*envp)
+	{
+		printf("%s\n", *envp);
+		envp++;
+	}
+	return (0);
+}
+
+int	main(int argc, char *argv[], char *envp[])
+{
+	parsing(argv, envp);
+	return (0);
 }
