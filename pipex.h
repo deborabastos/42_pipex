@@ -6,7 +6,7 @@
 /*   By: dalves-p <dalves-p@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/23 16:29:46 by dalves-p          #+#    #+#             */
-/*   Updated: 2021/12/03 11:45:02 by dalves-p         ###   ########.fr       */
+/*   Updated: 2021/12/03 12:55:28 by dalves-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,9 @@ typedef struct s_pipex
 	char	**cmds;
 	char	*infile;
 	char	*outfile;
+	char	*path;
 }	t_pipex;
 
+char	*ft_strstr(char *haystack, char *needle);
 
 #endif
