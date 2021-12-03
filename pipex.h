@@ -6,7 +6,7 @@
 /*   By: dalves-p <dalves-p@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/23 16:29:46 by dalves-p          #+#    #+#             */
-/*   Updated: 2021/12/02 22:15:22 by dalves-p         ###   ########.fr       */
+/*   Updated: 2021/12/03 11:45:02 by dalves-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,5 +20,14 @@
 # include <errno.h> // perror
 # include <string.h> // strerror
 # include <stdio.h> // TIRARRRRRRRR
+
+typedef struct s_pipex
+{
+	int		argc;
+	char	**cmds;
+	char	*infile;
+	char	*outfile;
+}	t_pipex;
+
 
 #endif
