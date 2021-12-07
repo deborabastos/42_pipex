@@ -6,7 +6,7 @@
 /*   By: dalves-p <dalves-p@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/23 16:29:11 by dalves-p          #+#    #+#             */
-/*   Updated: 2021/12/03 19:41:45 by dalves-p         ###   ########.fr       */
+/*   Updated: 2021/12/06 21:24:34 by dalves-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,18 +48,38 @@ int init(t_pipex *pipex, int argc, char *argv[], char *envp[])
 	return (0);
 }
 
+char	*get_cmd(char *cmds)
+{
+	char	*cmd;
+	int		i;
+
+	i = 0;
+	while (cmds)
+	{
+		cmd[i] = cmds[];
+		split????;
+		i++;
+	}
+	cmd[i] = NULL;
+	return (cmd);
+}
+
+
+
 int child_process(t_pipex *pipex, int fd[2])
 {
 	int		infile_fd;
+	char	*cmd;
 
 	printf("AQUIII %s\n", pipex->cmds[0]);
-	close(fd[0]);
+	close(fd[0]); // fecho o read do pipe
 	infile_fd = open(pipex->infile, O_RDONLY, 0777);
 	dup2(fd[1], 1); // STDOUT_FILENO => altera o stdout para o pipe (escrever o resultado no pipe)
 	dup2(infile_fd, 0); // STDIN_FILENO => colocar a leitura do infile no stdin
 	
-	
-	execve("/bin/ls", "ls", &pipex->path);
+	cmd = get_cmd(pipex->cmds[0]);
+		
+	execve("/bin/ls", cmd, NULL);
 	
 	return (0);
 }
