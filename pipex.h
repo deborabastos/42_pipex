@@ -6,7 +6,7 @@
 /*   By: dalves-p <dalves-p@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/23 16:29:46 by dalves-p          #+#    #+#             */
-/*   Updated: 2021/12/07 15:01:20 by dalves-p         ###   ########.fr       */
+/*   Updated: 2021/12/07 21:23:21 by dalves-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@
 # include <string.h> // strerror
 # include <stdio.h> // TIRARRRRRRRR
 
+# define	FD_R	0
+# define	FD_W	1
 
 # if defined _WIN32
 # 	define SEPARATOR	'\\'
@@ -35,7 +37,6 @@ typedef struct s_pipex
 	char	**cmds;
 	char	*infile;
 	char	*outfile;
-	char	*path;
 }	t_pipex;
 
 typedef struct s_list

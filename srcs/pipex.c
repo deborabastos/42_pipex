@@ -6,7 +6,7 @@
 /*   By: dalves-p <dalves-p@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/23 16:29:11 by dalves-p          #+#    #+#             */
-/*   Updated: 2021/12/07 21:09:39 by dalves-p         ###   ########.fr       */
+/*   Updated: 2021/12/07 21:55:25 by dalves-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,9 +81,8 @@ char	*get_path(char *envp[], char *cmd)
 		}
 		i++;
 	}
-	// if (access(selected_path, F_OK) == -1)
-	// 	exit (EXIT_FAILURE);
-	return (selected_path);
+	ft_putstr_fd("\033[31mError: wrong pathname\e[0m\n", 2);
+	exit(EXIT_FAILURE);
 }
 
 int child_process(t_pipex *pipex, char *envp[], int fd[2])
@@ -94,14 +93,14 @@ int child_process(t_pipex *pipex, char *envp[], int fd[2])
 	int		exec;
 
 	// printf("Primeiro comando %s\n", pipex->cmds[0]);
-	close(fd[0]); // fecho o read do pipe
+	close(fd[FD_R]); // fecho o read do pipe
 	infile_fd = open(pipex->infile, O_RDONLY, 0777);
 	if (infile_fd == -1)
 		exit(EXIT_FAILURE);	
-	dup2(fd[1], STDOUT_FILENO); // STDOUT_FILENO = 1=> altera o stdout para o pipe (escrever o resultado no pipe)
+	dup2(fd[FD_W], STDOUT_FILENO); // STDOUT_FILENO = 1=> altera o stdout para o pipe (escrever o resultado no pipe)
 	dup2(infile_fd, STDIN_FILENO); // STDIN_FILENO = 0 => colocar a leitura do infile no stdin
 	close(infile_fd);
-	close(fd[1]); // fecho o read do pipe
+	close(fd[FD_W]); // fecho o read do pipe
 	cmd = get_cmd(pipex->cmds[0]);
 	path = get_path(envp, cmd[0]);
 	exec = execve(path, cmd, envp);
@@ -118,15 +117,15 @@ int parent_process(t_pipex *pipex, char *envp[], int fd[2])
 	char	*path;
 	int		exec;
 
-	close(fd[1]); // fecho o write do pipe
+	close(fd[FD_W]); // fecho o write do pipe
 	// lê resultado do pipe
 	outfile_fd = open(pipex->outfile, O_WRONLY | O_CREAT | O_TRUNC, 0777);
 	if (outfile_fd == -1)
 		exit(EXIT_FAILURE);
-	dup2(fd[0], STDIN_FILENO); // STDIN_FILENO = 0 => lê o que vem do pipe (pipe se torna sdtin)
+	dup2(fd[FD_R], STDIN_FILENO); // STDIN_FILENO = 0 => lê o que vem do pipe (pipe se torna sdtin)
 	dup2(outfile_fd, STDOUT_FILENO); // STDOUT_FILENO = 1 => colocar a escrita do outfile no stdout
 	close(outfile_fd);
-	close(fd[1]); // fecho o read do pipe
+	close(fd[FD_W]); // fecho o read do pipe
 
 	// printf("%s\n", pipex->cmds[1]);
 	cmd = get_cmd(pipex->cmds[1]);
@@ -144,7 +143,7 @@ int parent_process(t_pipex *pipex, char *envp[], int fd[2])
 
 	// executa função
 
-	close(fd[0]); // fecha read	
+	close(fd[FD_R]); // fecha read	
 	return (0);
 }
 
@@ -170,14 +169,12 @@ int	main(int argc, char *argv[], char *envp[])
 		}
 		if (pid == 0)
 		{
-			// printf("=== Child === \n");
 			child_process(&pipex, envp, fd);		
 		}
 		else
 		{
-			// Parent process - read from pipe
 			wait(NULL);
-			// printf("=== Parent === \n");
+			
 			parent_process(&pipex, envp, fd);
 		}
 
@@ -187,7 +184,7 @@ int	main(int argc, char *argv[], char *envp[])
 	}
 	else 
 	{
-		// ft_putstr_fd("\033[31mError: check your arguments\nEx: ./pipex <file1> <cmd1> <cmd2> <file2>\n\e[0m", 2);
+		ft_putstr_fd("\033[31mError: check your arguments\nEx: ./pipex <file1> <cmd1> <cmd2> <file2>\n\e[0m", 2);
 		exit(EXIT_FAILURE);
 	}
 
