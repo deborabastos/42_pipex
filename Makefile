@@ -6,7 +6,7 @@
 #    By: dalves-p <dalves-p@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/23 16:30:23 by dalves-p          #+#    #+#              #
-#    Updated: 2021/12/08 14:07:40 by dalves-p         ###   ########.fr        #
+#    Updated: 2021/12/08 14:15:01 by dalves-p         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -117,14 +117,17 @@ $(NAME):	$(OBJS) $(OBJS_LIB)
 			$(CC) $(CFLAGS) -c $< -o $@
 
 bonus:		$(OBJS_BONUS) $(OBJS_LIB)
-			$(CC) $(OBJS_BONUS) $(SRCS_LIB) $(CFLAGS) -o $(NAME)
+			$(CC) $(OBJS_BONUS) $(OBJS_LIB) $(CFLAGS) -o $(NAME)
 
 clean:
-			$(RM) $(OBJS) $(OBJS_LIB)
+			$(RM) $(OBJS) $(OBJS_LIB) $(OBJS_BONUS)
 
 fclean:		clean
 			$(RM) $(NAME)
 			$(RM) *.out
+
+fclean_out:	fclean
+			$(RM) outfile*
 
 re:			fclean all
 
