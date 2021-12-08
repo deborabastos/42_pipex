@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.c                                            :+:      :+:    :+:   */
+/*   pipex_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dalves-p <dalves-p@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/23 16:29:11 by dalves-p          #+#    #+#             */
-/*   Updated: 2021/12/08 13:23:56 by dalves-p         ###   ########.fr       */
+/*   Updated: 2021/12/08 19:02:55 by dalves-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ int	main(int argc, char *argv[], char *envp[])
 	int		pid;
 	int		wstatus;
 
-	if (argc == 5 )
+	if (argc == 5)
 	{
 		if (pipe(fd) == -1)
 			error("\e[31m\e[1mError while opening the pipe\e[0m\n");

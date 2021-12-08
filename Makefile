@@ -6,7 +6,7 @@
 #    By: dalves-p <dalves-p@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/23 16:30:23 by dalves-p          #+#    #+#              #
-#    Updated: 2021/12/08 14:15:01 by dalves-p         ###   ########.fr        #
+#    Updated: 2021/12/08 18:59:48 by dalves-p         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -96,7 +96,6 @@ SRCS_LIB	=	libft/ft_strstr.c \
 				# libft/ft_strupcase.c \
 				# libft/ft_putlnbr.c \
 				# libft/ft_utoa_base.c \
-				# libft/ft_uinttoa_base.c \
 				# libft/ft_strrev.c \
 				# libft/ft_count_digit.c \
 				# libft/ft_gnl.c \
