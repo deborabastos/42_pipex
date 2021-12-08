@@ -6,7 +6,7 @@
 /*   By: dalves-p <dalves-p@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/23 16:29:46 by dalves-p          #+#    #+#             */
-/*   Updated: 2021/12/08 12:23:14 by dalves-p         ###   ########.fr       */
+/*   Updated: 2021/12/08 13:18:19 by dalves-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <sys/wait.h>
 # include <errno.h>
 # include <string.h>
+# include <stdio.h>
 
 # define FD_R 0
 # define FD_W 1

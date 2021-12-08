@@ -6,7 +6,7 @@
 /*   By: dalves-p <dalves-p@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/23 16:29:11 by dalves-p          #+#    #+#             */
-/*   Updated: 2021/12/08 12:49:27 by dalves-p         ###   ########.fr       */
+/*   Updated: 2021/12/08 13:23:56 by dalves-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,6 @@ int	main(int argc, char *argv[], char *envp[])
 	int		fd[2];
 	int		pid;
 	int		wstatus;
-	int		status_code;
 
 	if (argc == 5 )
 	{
@@ -114,19 +113,11 @@ int	main(int argc, char *argv[], char *envp[])
 		{
 			wait(&wstatus);
 			if (WEXITSTATUS(wstatus) == 0)
-			{
-				status_code = WEXITSTATUS(wstatus);
-				if (status_code == 0)
-					parent_process(argc, argv, envp, fd);
-				else
-					error("\e[31m\e[1mError while waiting for child\e[0m\n");
-			}
+				parent_process(argc, argv, envp, fd);
 		}		
 		return (0);
 	}
 	else
-	{
-		error("\e[31m\e[1mError: check your arguments\n \
+		error("\e[31m\e[1mError: check your arguments\n\
 Ex: ./pipex <file1> <cmd1> <cmd2> <file2>\e[0m\n");
-	}
 }
