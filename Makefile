@@ -6,7 +6,7 @@
 #    By: dalves-p <dalves-p@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/23 16:30:23 by dalves-p          #+#    #+#              #
-#    Updated: 2021/12/08 11:22:16 by dalves-p         ###   ########.fr        #
+#    Updated: 2021/12/08 12:03:39 by dalves-p         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -113,6 +113,7 @@ $(NAME):	$(OBJS) $(OBJS_LIB)
 
 run:		all
 			./$(NAME) infile2 "grep Now" "wc -w" "outfile2"
+			./$(NAME) infile2 "grep Now" "head -2" "outfile3"
 #			./$(NAME) infile2 "wc -w" "cat" "outfile"
 			./$(NAME) infile "cat -n" "grep Talita" outfile
 #			./$(NAME) infile "cat" "wc -l" outfile 

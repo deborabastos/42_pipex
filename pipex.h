@@ -6,30 +6,28 @@
 /*   By: dalves-p <dalves-p@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/23 16:29:46 by dalves-p          #+#    #+#             */
-/*   Updated: 2021/12/07 21:23:21 by dalves-p         ###   ########.fr       */
+/*   Updated: 2021/12/08 11:58:17 by dalves-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PIPEX_H
 # define PIPEX_H
 
-# include <unistd.h> //access,unlink,close,read,write,pipe,dup,dup2,execve,fork
-# include <fcntl.h> // open
-# include <stdlib.h> // malloc, free, exit
-# include <sys/wait.h> // wait, waitpid
-# include <errno.h> // perror
-# include <string.h> // strerror
-# include <stdio.h> // TIRARRRRRRRR
+# include <unistd.h>
+# include <fcntl.h>
+# include <stdlib.h>
+# include <sys/wait.h>
+# include <errno.h>
+# include <string.h>
 
-# define	FD_R	0
-# define	FD_W	1
+# define FD_R 0
+# define FD_W 1
 
 # if defined _WIN32
-# 	define SEPARATOR	'\\'
+#  define SEPARATOR	'\\'
 # else
-#	define SEPARATOR	"/"
+#  define SEPARATOR	"/"
 # endif
-
 
 typedef struct s_pipex
 {
@@ -38,14 +36,6 @@ typedef struct s_pipex
 	char	*infile;
 	char	*outfile;
 }	t_pipex;
-
-typedef struct s_list
-{
-	void			*content;
-	struct s_list	*next;
-}					t_list;
-
-
 
 /*
 ** LIBFT
@@ -102,15 +92,6 @@ void	ft_putchar_fd(char c, int fd);
 void	ft_putstr_fd(char *s, int fd);
 void	ft_putendl_fd(char *s, int fd);
 void	ft_putnbr_fd(int n, int fd);
-t_list	*ft_lstnew(void *content);
-void	ft_lstadd_front(t_list **lst, t_list *new);
-int		ft_lstsize(t_list *lst);
-t_list	*ft_lstlast(t_list *lst);
-void	ft_lstadd_back(t_list **lst, t_list *new);
-void	ft_lstdelone(t_list *lst, void (*del)(void*));
-void	ft_lstclear(t_list **lst, void (*del)(void*));
-void	ft_lstiter(t_list *lst, void (*f)(void *));
-t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 int		ft_fibonacci(int index);
 int		ft_isprime(int nb);
 int		ft_factorial(int nb);
