@@ -1,42 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dalves-p <dalves-p@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/23 16:29:46 by dalves-p          #+#    #+#             */
-/*   Updated: 2021/12/07 15:01:20 by dalves-p         ###   ########.fr       */
+/*   Created: 2021/05/17 17:13:34 by dalves-p          #+#    #+#             */
+/*   Updated: 2021/12/07 10:31:14 by dalves-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
+#ifndef LIBFT_H
+# define LIBFT_H
 
-# include <unistd.h> //access,unlink,close,read,write,pipe,dup,dup2,execve,fork
-# include <fcntl.h> // open
-# include <stdlib.h> // malloc, free, exit
-# include <sys/wait.h> // wait, waitpid
-# include <errno.h> // perror
-# include <string.h> // strerror
-# include <stdio.h> // TIRARRRRRRRR
+# define BUFFER_SIZE	1024
+# define OPEN_MAX		255
 
-
-# if defined _WIN32
-# 	define SEPARATOR	'\\'
-# else
-#	define SEPARATOR	"/"
-# endif
-
-
-typedef struct s_pipex
-{
-	int		argc;
-	char	**cmds;
-	char	*infile;
-	char	*outfile;
-	char	*path;
-}	t_pipex;
+# include <unistd.h>
+# include <stdlib.h>
 
 typedef struct s_list
 {
@@ -44,13 +25,9 @@ typedef struct s_list
 	struct s_list	*next;
 }					t_list;
 
-
-
 /*
-** LIBFT
+** LIBRARY: <ctype.h>
 */
-
-char	*ft_strstr(char *haystack, char *needle);
 
 int		ft_isalpha(int c);
 int		ft_isdigit(int c);
@@ -67,6 +44,11 @@ int		ft_ispunct(int c);
 int		ft_isxdigit(int c);
 int		ft_toupper(int c);
 int		ft_tolower(int c);
+
+/*
+** LIBRARY: <strings.h>
+*/
+
 void	*ft_memset(void *b, int c, size_t len);
 void	*ft_memcpy(void *dst, const void *src, size_t n);
 void	*ft_memccpy(void *dst, const void *src, int c, size_t n);
@@ -83,24 +65,60 @@ char	*ft_strncat(char *dest, char *src, unsigned int nb);
 size_t	ft_strlcat(char *dst, const char *src, size_t dstsize);
 char	*ft_strchr(const char *s, int c);
 char	*ft_strrchr(const char *s, int c);
+char	*ft_strstr(char *haystack, char *needle);
 char	*ft_strnstr(const char *haystack, const char *needle, size_t len);
 int		ft_strcmp(char *s1, char *s2);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 char	*ft_strdup(const char *s1);
+
+/*
+** LIBRARY: <stdio.h>
+*/
+
 void	ft_putchar(char c);
+
+/*
+** LIBRARY: <stdlib.h>
+*/
+
 int		ft_atoi(const char *str);
 void	*ft_calloc(size_t count, size_t size);
-int		ft_gnl(int fd, char **line);
+
+/*
+** Get Next Line
+*/
+
+int	ft_gnl(int fd, char **line);
+
+/*
+** Additional Functions - Strings
+*/
+
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_strtrim(char const *s1, char const *set);
 char	**ft_split(char const *s, char c);
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
+
+/*
+** Additional Functions - int to ascii
+*/
+
 char	*ft_itoa(int n);
+
+/*
+** Additional Functions - FD functions
+*/
+
 void	ft_putchar_fd(char c, int fd);
 void	ft_putstr_fd(char *s, int fd);
 void	ft_putendl_fd(char *s, int fd);
 void	ft_putnbr_fd(int n, int fd);
+
+/*
+** Additional Functions - Linked list
+*/
+
 t_list	*ft_lstnew(void *content);
 void	ft_lstadd_front(t_list **lst, t_list *new);
 int		ft_lstsize(t_list *lst);
@@ -110,11 +128,21 @@ void	ft_lstdelone(t_list *lst, void (*del)(void*));
 void	ft_lstclear(t_list **lst, void (*del)(void*));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
+
+/*
+** Additional Functions - Math
+*/
+
 int		ft_fibonacci(int index);
 int		ft_isprime(int nb);
 int		ft_factorial(int nb);
 int		ft_pow(int nb, int power);
 int		ft_sqrt(int nb);
+
+/*
+** Additional Functions - Other
+*/
+
 void	ft_putstr(char *s);
 void	ft_putnstr(char *s, int n);
 void	ft_putendl(char *s);
@@ -132,5 +160,6 @@ void	ft_putlnbr(long long int n);
 char	*ft_utoa_base(unsigned int n, char *base);
 char	*ft_uinttoa_base(uintptr_t n, char *base);
 char	*ft_strrev(char *str);
+
 
 #endif

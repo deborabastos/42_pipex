@@ -1,14 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex_utils.c                                      :+:      :+:    :+:   */
+/*   ft_islower.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dalves-p <dalves-p@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/03 12:55:01 by dalves-p          #+#    #+#             */
-/*   Updated: 2021/12/07 10:15:52 by dalves-p         ###   ########.fr       */
+/*   Created: 2021/06/25 22:44:13 by dalves-p          #+#    #+#             */
+/*   Updated: 2021/06/28 10:57:33 by dalves-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../pipex.h"
+#include "libft.h"
 
+/*
+** LIBRARY: <ctype.h>
+** DESCRIPTION:
+** 		 The islower() function tests if c is a lower-case letter.
+*/
+
+int	ft_islower(int c)
+{
+	if (c >= 'a' && c <= 'z')
+		return (1);
+	return (0);
+}
