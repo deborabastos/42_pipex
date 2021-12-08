@@ -6,7 +6,7 @@
 /*   By: dalves-p <dalves-p@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/23 16:29:46 by dalves-p          #+#    #+#             */
-/*   Updated: 2021/12/08 11:58:17 by dalves-p         ###   ########.fr       */
+/*   Updated: 2021/12/08 12:23:14 by dalves-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ typedef struct s_pipex
 /*
 ** LIBFT
 */
-
+int		error(char *msg);
 char	*ft_strstr(char *haystack, char *needle);
 
 int		ft_isalpha(int c);

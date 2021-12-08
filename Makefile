@@ -6,14 +6,15 @@
 #    By: dalves-p <dalves-p@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/23 16:30:23 by dalves-p          #+#    #+#              #
-#    Updated: 2021/12/08 12:03:39 by dalves-p         ###   ########.fr        #
+#    Updated: 2021/12/08 12:23:34 by dalves-p         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		=	pipex
 CC			=	clang
 SRCS		=	srcs/pipex.c \
-				
+				srcs/pipex_utils.c \
+
 SRCS_LIB	=	libft/ft_strstr.c \
 				libft/ft_strlen.c \
 				libft/ft_strchr.c \
