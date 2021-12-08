@@ -6,7 +6,7 @@
 /*   By: dalves-p <dalves-p@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/23 16:29:46 by dalves-p          #+#    #+#             */
-/*   Updated: 2021/12/08 13:18:19 by dalves-p         ###   ########.fr       */
+/*   Updated: 2021/12/08 13:48:02 by dalves-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@
 # include <sys/wait.h>
 # include <errno.h>
 # include <string.h>
-# include <stdio.h>
 
 # define FD_R 0
 # define FD_W 1
@@ -38,10 +37,11 @@ typedef struct s_pipex
 	char	*outfile;
 }	t_pipex;
 
+int		error(char *msg);
+
 /*
 ** LIBFT
 */
-int		error(char *msg);
 char	*ft_strstr(char *haystack, char *needle);
 
 int		ft_isalpha(int c);

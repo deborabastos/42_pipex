@@ -6,7 +6,7 @@
 #    By: dalves-p <dalves-p@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/23 16:30:23 by dalves-p          #+#    #+#              #
-#    Updated: 2021/12/08 12:23:34 by dalves-p         ###   ########.fr        #
+#    Updated: 2021/12/08 14:07:40 by dalves-p         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,6 +14,9 @@ NAME		=	pipex
 CC			=	clang
 SRCS		=	srcs/pipex.c \
 				srcs/pipex_utils.c \
+
+SRCS_BONUS		=	srcs/pipex_bonus.c \
+				srcs/pipex_utils_bonus.c \
 
 SRCS_LIB	=	libft/ft_strstr.c \
 				libft/ft_strlen.c \
@@ -101,23 +104,20 @@ SRCS_LIB	=	libft/ft_strstr.c \
 CFLAGS		=	-Wall -Wextra -Werror
 RM			=	rm -f
 OBJS		=	$(SRCS:%.c=%.o)
+OBJS_BONUS	=	$(SRCS_BONUS:%.c=%.o)
 OBJS_LIB	=	$(SRCS_LIB:%.c=%.o)
 
 
 all:		$(NAME)
 
 $(NAME):	$(OBJS) $(OBJS_LIB)
-			$(CC) $(SRCS) $(SRCS_LIB) $(CFLAGS) -o $(NAME)
+			$(CC) $(OBJS) $(OBJS_LIB) $(CFLAGS) -o $(NAME)
 
 %o:			%.c
 			$(CC) $(CFLAGS) -c $< -o $@
 
-run:		all
-			./$(NAME) infile2 "grep Now" "wc -w" "outfile2"
-			./$(NAME) infile2 "grep Now" "head -2" "outfile3"
-#			./$(NAME) infile2 "wc -w" "cat" "outfile"
-			./$(NAME) infile "cat -n" "grep Talita" outfile
-#			./$(NAME) infile "cat" "wc -l" outfile 
+bonus:		$(OBJS_BONUS) $(OBJS_LIB)
+			$(CC) $(OBJS_BONUS) $(SRCS_LIB) $(CFLAGS) -o $(NAME)
 
 clean:
 			$(RM) $(OBJS) $(OBJS_LIB)

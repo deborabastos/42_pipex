@@ -1,0 +1,10 @@
+./pipex infile2 "grep Now" "wc -w" outfile1
+./pipex infile2 "grep Now" "head -2" outfile2
+./pipex infile2 "wc -w" "cat" outfile3
+./pipex infile "cat -n" "grep Talita" outfile4
+./pipex infile "cat" "wc -l" outfile5
+./pipex infile "cat" "cat" outfile6
+./pipex infilex "cat" "cat" outfile7
+./pipex infile "catt" "cat" outfile8
+./pipex infile "cat" "catt" outfile9
+./pipex infile "cat" "cat"
