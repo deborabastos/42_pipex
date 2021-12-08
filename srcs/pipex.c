@@ -6,7 +6,7 @@
 /*   By: dalves-p <dalves-p@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/23 16:29:11 by dalves-p          #+#    #+#             */
-/*   Updated: 2021/12/07 21:55:25 by dalves-p         ###   ########.fr       */
+/*   Updated: 2021/12/08 11:23:44 by dalves-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ int init(t_pipex *pipex, int argc, char *argv[])
 		// printf("%s\n", pipex->cmds[i - 2]);
 		i++;
 	}
-	// printf("%s\n", pipex->path);
 	return (0);
 }
 
@@ -55,7 +54,7 @@ char	*get_path(char *envp[], char *cmd)
 {
 	char	*path;
 	char	*full_path;
-	char	**ptr_path;
+	char	**ptr_paths;
 	char	*selected_path;
 	int		i;
 
@@ -67,12 +66,12 @@ char	*get_path(char *envp[], char *cmd)
 	}
 	full_path = ft_strtrim(path, "PATH=");
 	// printf("Trimmed: %s\n", full_path);
-	ptr_path = ft_split(full_path, ':');
-	// printf("Path: %s\n", ptr_path[6]);
+	ptr_paths = ft_split(full_path, ':');
+	// printf("Path: %s\n", ptr_paths[6]);
 	i = 0;
-	while (ptr_path[i])
+	while (ptr_paths[i])
 	{
-		selected_path = ft_strjoin(ft_strjoin(ptr_path[i], SEPARATOR), cmd);
+		selected_path = ft_strjoin(ft_strjoin(ptr_paths[i], SEPARATOR), cmd);
 		// printf("Selected path %s\n", selected_path);
 		if (access(selected_path, F_OK) == 0)
 		{
@@ -81,8 +80,7 @@ char	*get_path(char *envp[], char *cmd)
 		}
 		i++;
 	}
-	ft_putstr_fd("\033[31mError: wrong pathname\e[0m\n", 2);
-	exit(EXIT_FAILURE);
+	return ("error");
 }
 
 int child_process(t_pipex *pipex, char *envp[], int fd[2])
@@ -90,7 +88,7 @@ int child_process(t_pipex *pipex, char *envp[], int fd[2])
 	int		infile_fd;
 	char	**cmd;
 	char	*path;
-	int		exec;
+	int		err;
 
 	// printf("Primeiro comando %s\n", pipex->cmds[0]);
 	close(fd[FD_R]); // fecho o read do pipe
@@ -103,9 +101,12 @@ int child_process(t_pipex *pipex, char *envp[], int fd[2])
 	close(fd[FD_W]); // fecho o read do pipe
 	cmd = get_cmd(pipex->cmds[0]);
 	path = get_path(envp, cmd[0]);
-	exec = execve(path, cmd, envp);
-	if (exec == -1)
+	err = execve(path, cmd, envp);	
+	if (err == -1)
+	{
+		ft_putstr_fd("\033[31mCould not find program to execute - child!\e[0m\n", 2);
 		exit(EXIT_FAILURE);
+	}
 	return (0);
 }
 
@@ -115,7 +116,7 @@ int parent_process(t_pipex *pipex, char *envp[], int fd[2])
 	int		outfile_fd;
 	char	**cmd;
 	char	*path;
-	int		exec;
+	int		err;
 
 	close(fd[FD_W]); // fecho o write do pipe
 	// lê resultado do pipe
@@ -126,6 +127,7 @@ int parent_process(t_pipex *pipex, char *envp[], int fd[2])
 	dup2(outfile_fd, STDOUT_FILENO); // STDOUT_FILENO = 1 => colocar a escrita do outfile no stdout
 	close(outfile_fd);
 	close(fd[FD_W]); // fecho o read do pipe
+	close(fd[FD_R]); // fecha read		
 
 	// printf("%s\n", pipex->cmds[1]);
 	cmd = get_cmd(pipex->cmds[1]);
@@ -136,14 +138,12 @@ int parent_process(t_pipex *pipex, char *envp[], int fd[2])
 
 	path = get_path(envp, cmd[0]);
 	// printf("%s\n", path);
-	
-	exec = execve(path, cmd, envp);
-	if (exec == -1)
+	err = execve(path, cmd, envp);
+	if (err == -1)
+	{
+		ft_putstr_fd("\033[31mCould not find program to execute - parent!\e[0m\n", 2);
 		exit(EXIT_FAILURE);
-
-	// executa função
-
-	close(fd[FD_R]); // fecha read	
+	}
 	return (0);
 }
 
@@ -152,6 +152,7 @@ int	main(int argc, char *argv[], char *envp[])
 	t_pipex	pipex;
 	int 	fd[2];
 	int		pid;
+	int		wstatus;
 
 	if (argc == 5 )
 	{
@@ -169,13 +170,19 @@ int	main(int argc, char *argv[], char *envp[])
 		}
 		if (pid == 0)
 		{
-			child_process(&pipex, envp, fd);		
+			child_process(&pipex, envp, fd);	
 		}
 		else
 		{
-			wait(NULL);
-			
-			parent_process(&pipex, envp, fd);
+			wait(&wstatus);
+			if (wstatus != 256)
+			{
+				parent_process(&pipex, envp, fd);
+			}
+			else
+			{
+				exit(EXIT_FAILURE);
+			}
 		}
 
 		
