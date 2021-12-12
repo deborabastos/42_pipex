@@ -6,7 +6,7 @@
 /*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/23 16:29:11 by dalves-p          #+#    #+#             */
-/*   Updated: 2021/12/12 20:39:47 by coder            ###   ########.fr       */
+/*   Updated: 2021/12/12 20:44:19 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,28 +20,14 @@ char	**get_cmd(char *cmds)
 	printf("\ncmds: %s\n", cmds);
 	cmd = ft_split_pipex(cmds, ' ');
 	i = 0;
-	// preciso tratar antes do split, se não divide o espaço em dois cmd com ' cada um
 	while (cmd[i])
 	{
-		printf("cmd: %s\n", cmd[i]);
-
-		// if (cmd[i] == "'" && cmd[i+1] == "'")
-		// {
-		// 	cmd[i] = "_";
-		// }
 		if (ft_strstr(cmd[i], "'") != 0 )
 		{
 			cmd[i] = ft_strtrim(cmd[i], "'");	
 		}
 		i++;
 	}
-	i = 0;
-	while (cmd[i])
-	{
-		printf("Após cmd: %s\n", cmd[i]);
-		i++;
-	}
-
 	return (cmd);
 }
 
