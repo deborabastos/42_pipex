@@ -6,7 +6,7 @@
 #    By: coder <coder@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/23 16:30:23 by dalves-p          #+#    #+#              #
-#    Updated: 2021/12/12 20:05:05 by coder            ###   ########.fr        #
+#    Updated: 2021/12/12 21:42:36 by coder            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -126,7 +126,7 @@ fclean:		clean
 			$(RM) $(NAME)
 			$(RM) *.out
 
-fclean_out:	fclean
+oclean:		fclean
 			$(RM) outfile*
 
 re:			fclean all
