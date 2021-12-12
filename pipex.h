@@ -6,7 +6,7 @@
 /*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/23 16:29:46 by dalves-p          #+#    #+#             */
-/*   Updated: 2021/12/12 20:38:44 by coder            ###   ########.fr       */
+/*   Updated: 2021/12/12 20:51:10 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ typedef struct s_pipex
 
 int		error(char *msg);
 char	**ft_split_pipex(char const *s, char c);
-
 
 /*
 ** LIBFT

@@ -6,7 +6,7 @@
 /*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/23 16:29:11 by dalves-p          #+#    #+#             */
-/*   Updated: 2021/12/12 20:44:19 by coder            ###   ########.fr       */
+/*   Updated: 2021/12/12 20:50:53 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,13 @@ char	**get_cmd(char *cmds)
 	char	**cmd;
 	int		i;
 
-	printf("\ncmds: %s\n", cmds);
 	cmd = ft_split_pipex(cmds, ' ');
 	i = 0;
 	while (cmd[i])
 	{
-		if (ft_strstr(cmd[i], "'") != 0 )
+		if (ft_strstr(cmd[i], "'") != 0)
 		{
-			cmd[i] = ft_strtrim(cmd[i], "'");	
+			cmd[i] = ft_strtrim(cmd[i], "'");
 		}
 		i++;
 	}
@@ -102,7 +101,7 @@ int	parent_process(int argc, char *argv[], char *envp[], int fd[2])
 	err = execve(path, cmd, envp);
 	if (err == -1)
 	{
-		unlink(argv[argc - 1]);		
+		unlink(argv[argc - 1]);
 		error("\e[31m\e[1mCould not find program to execute!\e[0m\n");
 	}
 	return (0);
