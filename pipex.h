@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dalves-p <dalves-p@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/23 16:29:46 by dalves-p          #+#    #+#             */
-/*   Updated: 2021/12/08 19:00:16 by dalves-p         ###   ########.fr       */
+/*   Updated: 2021/12/12 20:38:44 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,11 @@
 # include <sys/wait.h>
 # include <errno.h>
 # include <string.h>
+# include <stdio.h> // TIRARRRR
 
-# define FD_R 0
-# define FD_W 1
+# define FD_R 		0
+# define FD_W 		1
+# define SPACEMAN 	'#$@'
 
 # if defined _WIN32
 #  define SEPARATOR	'\\'
@@ -38,6 +40,8 @@ typedef struct s_pipex
 }	t_pipex;
 
 int		error(char *msg);
+char	**ft_split_pipex(char const *s, char c);
+
 
 /*
 ** LIBFT

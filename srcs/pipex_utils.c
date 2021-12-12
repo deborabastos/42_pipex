@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dalves-p <dalves-p@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 12:55:01 by dalves-p          #+#    #+#             */
-/*   Updated: 2021/12/08 12:44:13 by dalves-p         ###   ########.fr       */
+/*   Updated: 2021/12/10 16:51:35 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,5 +16,4 @@ int	error(char *msg)
 {
 	write(2, msg, ft_strlen(msg));
 	exit (EXIT_FAILURE);
-	return (0);
 }

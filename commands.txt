@@ -1,3 +1,15 @@
+./pipex "infile" "tr a b" "tr b ' '" "outfile1"
+< "infile" tr a b| tr b ' ' > "outfile2"
+
+
+
+# VM não tem ping instalado
+# Não sei o que deve ter no infile para funcionar
+./pipex "infile" "ping 8.8.8.8" "grep ms" "outfile2"
+< "infile" ping 8.8.8.8 | grep ms > "outfile2"
+
+
+
 ./pipex infile2 "grep Now" "wc -w" outfile1
 ./pipex infile2 "grep Now" "head -2" outfile2
 ./pipex infile2 "wc -w" "cat" outfile3
@@ -8,3 +20,4 @@
 ./pipex infile "catt" "cat" outfile8
 ./pipex infile "cat" "catt" outfile9
 ./pipex infile "cat" "cat"
+./pipex infile "cat" outfile9

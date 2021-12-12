@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: dalves-p <dalves-p@student.42sp.org.br>    +#+  +:+       +#+         #
+#    By: coder <coder@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/23 16:30:23 by dalves-p          #+#    #+#              #
-#    Updated: 2021/12/08 18:59:48 by dalves-p         ###   ########.fr        #
+#    Updated: 2021/12/12 20:05:05 by coder            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,11 +25,13 @@ SRCS_LIB	=	libft/ft_strstr.c \
 				libft/ft_count_words.c \
 				libft/ft_substr.c \
 				libft/ft_split.c \
+				libft/ft_split_pipex.c \
 				libft/ft_strdup.c \
 				libft/ft_strlcpy.c \
 				libft/ft_strlcat.c \
 				libft/ft_strjoin.c \
 				libft/ft_putstr_fd.c \
+				libft/ft_strcmp.c \
 
 				# libft/ft_memset.c \
 				# libft/ft_bzero.c \
@@ -38,7 +40,6 @@ SRCS_LIB	=	libft/ft_strstr.c \
 				# libft/ft_memchr.c \
 				# libft/ft_memcmp.c \
 				# libft/ft_memmove.c \
-				# libft/ft_strcmp.c \
 				# libft/ft_strncmp.c \
 				# libft/ft_strcpy.c \
 				# libft/ft_strncpy.c \

@@ -6,7 +6,7 @@
 /*   By: dalves-p <dalves-p@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/23 16:29:11 by dalves-p          #+#    #+#             */
-/*   Updated: 2021/12/08 19:02:55 by dalves-p         ###   ########.fr       */
+/*   Updated: 2021/12/08 19:09:08 by dalves-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,5 +119,5 @@ int	main(int argc, char *argv[], char *envp[])
 	}
 	else
 		error("\e[31m\e[1mError: check your arguments\n\
-Ex: ./pipex <file1> <cmd1> <cmd2> <file2>\e[0m\n");
+Ex: ./pipex <infile> <cmd1> <cmd2> <outfile>\e[0m\n");
 }
