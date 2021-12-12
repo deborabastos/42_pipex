@@ -6,7 +6,7 @@
 /*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/30 20:53:06 by dalves-p          #+#    #+#             */
-/*   Updated: 2021/12/12 20:53:32 by coder            ###   ########.fr       */
+/*   Updated: 2021/12/12 21:35:59 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,24 @@
 **	the allocation fails.
 */
 
-void undo_space(char *split)
+char	**undo_space(char **split)
 {
-	split[0] = '\'';
-	split[1] = ' ';
-	split[2] = '\'';
+	size_t	j;
+
+	j = 0;
+	while (split[j])
+	{
+		if (ft_strcmp(split[j], "#$@") == 0)
+		{
+			split[j][0] = '\'';
+			split[j][1] = ' ';
+			split[j][2] = '\'';
+		}
+		j++;
+	}
+	return (split);
 }
+
 static char	**get_strs(char const *s, char c)
 {
 	size_t	i;
@@ -52,17 +64,8 @@ static char	**get_strs(char const *s, char c)
 		i++;
 	}
 	split[j] = ft_substr(s, index, (i - index));
-	j++;
-	split[j] = NULL;
-	j = 0;
-	while (split[j])
-	{
-		if(ft_strcmp( split[j], "#$@") == 0)
-		{
-			undo_space(split[j]);
-		}
-		j++;
-	}
+	split[++j] = NULL;
+	split = undo_space(split);
 	return (split);
 }
 
