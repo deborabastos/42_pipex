@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex_bonus.c                                      :+:      :+:    :+:   */
+/*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dalves-p <dalves-p@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/23 16:29:11 by dalves-p          #+#    #+#             */
-/*   Updated: 2021/12/08 19:09:08 by dalves-p         ###   ########.fr       */
+/*   Updated: 2021/12/12 21:09:17 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,18 @@
 char	**get_cmd(char *cmds)
 {
 	char	**cmd;
+	int		i;
 
-	cmd = ft_split(cmds, ' ');
+	cmd = ft_split_pipex(cmds, ' ');
+	i = 0;
+	while (cmd[i])
+	{
+		if (ft_strstr(cmd[i], "'") != 0)
+		{
+			cmd[i] = ft_strtrim(cmd[i], "'");
+		}
+		i++;
+	}
 	return (cmd);
 }
 
@@ -90,7 +100,10 @@ int	parent_process(int argc, char *argv[], char *envp[], int fd[2])
 	path = get_path(envp, cmd[0]);
 	err = execve(path, cmd, envp);
 	if (err == -1)
+	{
+		unlink(argv[argc - 1]);
 		error("\e[31m\e[1mCould not find program to execute!\e[0m\n");
+	}
 	return (0);
 }
 
