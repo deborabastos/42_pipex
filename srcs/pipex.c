@@ -6,7 +6,7 @@
 /*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/23 16:29:11 by dalves-p          #+#    #+#             */
-/*   Updated: 2021/12/15 21:07:04 by coder            ###   ########.fr       */
+/*   Updated: 2021/12/15 21:45:53 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,11 @@ char	*get_path(char *envp[], char *cmd)
 			return (selected_path);	
 		}
 		free(ptr_path);
+		free(ptr_paths[i]);
 		free(selected_path);
 		i++;
 	}
+	free(ptr_paths);
 	return (cmd);
 }
 

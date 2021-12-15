@@ -6,7 +6,7 @@
 /*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/30 20:53:06 by dalves-p          #+#    #+#             */
-/*   Updated: 2021/12/15 21:05:24 by coder            ###   ########.fr       */
+/*   Updated: 2021/12/15 21:45:19 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,6 @@ char	**ft_split_pipex(char const *s, char c)
 		free(scpy);
 		return (split);
 	}
-	printf("scpy: %s\n", scpy);
 	split = get_strs(scpy, c);
 	// free(scpy);
 	return (split);
