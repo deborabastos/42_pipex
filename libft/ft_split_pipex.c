@@ -6,7 +6,7 @@
 /*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/30 20:53:06 by dalves-p          #+#    #+#             */
-/*   Updated: 2021/12/12 21:35:59 by coder            ###   ########.fr       */
+/*   Updated: 2021/12/15 21:05:24 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,15 +69,14 @@ static char	**get_strs(char const *s, char c)
 	return (split);
 }
 
-char	*check_spaces(char *str)
+void	check_spaces(char **str)
 {
 	char	*ptr;
 
-	ptr = ft_strstr(str, "' '");
+	ptr = ft_strstr(*str, "' '");
 	ptr[0] = '#';
 	ptr[1] = '$';
 	ptr[2] = '@';
-	return (str);
 }
 
 char	**ft_split_pipex(char const *s, char c)
@@ -87,11 +86,12 @@ char	**ft_split_pipex(char const *s, char c)
 
 	if (!s)
 		return (0);
-	scpy = ft_strtrim(s, &c);
+	scpy = (char *)s;
+	// scpy = ft_strtrim(s, &c);
 	if (!scpy)
 		return (0);
 	if (ft_strstr(scpy, "' '") != 0)
-		scpy = check_spaces(scpy);
+		check_spaces(&scpy);
 	if (ft_count_words(scpy, c) == 0)
 	{
 		split = malloc(1 * sizeof(char *));
@@ -99,7 +99,8 @@ char	**ft_split_pipex(char const *s, char c)
 		free(scpy);
 		return (split);
 	}
+	printf("scpy: %s\n", scpy);
 	split = get_strs(scpy, c);
-	free(scpy);
+	// free(scpy);
 	return (split);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dalves-p <dalves-p@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 17:13:34 by dalves-p          #+#    #+#             */
-/*   Updated: 2021/12/08 18:59:40 by dalves-p         ###   ########.fr       */
+/*   Updated: 2021/12/15 20:07:18 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 
 # include <unistd.h>
 # include <stdlib.h>
+# include <stdio.h> // TIRARRRR
 
 typedef struct s_list
 {

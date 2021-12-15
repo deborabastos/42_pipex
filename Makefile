@@ -6,12 +6,12 @@
 #    By: coder <coder@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/23 16:30:23 by dalves-p          #+#    #+#              #
-#    Updated: 2021/12/12 21:42:36 by coder            ###   ########.fr        #
+#    Updated: 2021/12/15 20:20:41 by coder            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		=	pipex
-CC			=	clang
+CC			=	cc
 SRCS		=	srcs/pipex.c \
 				srcs/pipex_utils.c \
 
@@ -101,7 +101,7 @@ SRCS_LIB	=	libft/ft_strstr.c \
 				# libft/ft_count_digit.c \
 				# libft/ft_gnl.c \
 
-CFLAGS		=	-Wall -Wextra -Werror
+CFLAGS		=	-Wall -Wextra -Werror -g3 -fsanitize=address
 RM			=	rm -f
 OBJS		=	$(SRCS:%.c=%.o)
 OBJS_BONUS	=	$(SRCS_BONUS:%.c=%.o)

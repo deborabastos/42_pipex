@@ -1,4 +1,6 @@
 ./pipex "infile" "tr b ' '" "tr a '@'" "outfile1"
+./pipex "infile" "   tr b ' '   " "   tr a '@'  " "outfile1"
+
 < "infile" tr a b| tr b ' ' > "outfile2"
 
 

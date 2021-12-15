@@ -6,7 +6,7 @@
 /*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/23 16:29:11 by dalves-p          #+#    #+#             */
-/*   Updated: 2021/12/12 21:09:17 by coder            ###   ########.fr       */
+/*   Updated: 2021/12/15 21:07:04 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ char	*get_path(char *envp[], char *cmd)
 	char	*path;
 	char	*full_path;
 	char	**ptr_paths;
+	char	*ptr_path;
 	char	*selected_path;
 	int		i;
 
@@ -45,16 +46,22 @@ char	*get_path(char *envp[], char *cmd)
 		envp++;
 	}
 	full_path = ft_strtrim(path, "PATH=");
-	ptr_paths = ft_split(full_path, ':');
+	ptr_paths = ft_split_pipex(full_path, ':');
+	free(full_path);
 	i = 0;
 	while (ptr_paths[i])
 	{
-		selected_path = ft_strjoin(ft_strjoin(ptr_paths[i], SEPARATOR), cmd);
+		ptr_path = ft_strjoin(ptr_paths[i], SEPARATOR);
+		selected_path = ft_strjoin(ptr_path, cmd);
 		if (access(selected_path, F_OK) == 0)
-			return (selected_path);
+		{
+			return (selected_path);	
+		}
+		free(ptr_path);
+		free(selected_path);
 		i++;
 	}
-	return ("error");
+	return (cmd);
 }
 
 int	child_process(char *argv[], char *envp[], int fd[2])
@@ -62,20 +69,18 @@ int	child_process(char *argv[], char *envp[], int fd[2])
 	int		infile_fd;
 	char	**cmd;
 	char	*path;
-	int		err;
 
 	close(fd[FD_R]);
 	infile_fd = open(argv[1], O_RDONLY, 0777);
 	if (infile_fd == -1)
 		error("\e[31m\e[1mError while opening infile\e[0m\n");
-	dup2(fd[FD_W], STDOUT_FILENO);
+	// dup2(fd[FD_W], STDOUT_FILENO);
 	dup2(infile_fd, STDIN_FILENO);
 	close(infile_fd);
 	close(fd[FD_W]);
 	cmd = get_cmd(argv[2]);
 	path = get_path(envp, cmd[0]);
-	err = execve(path, cmd, envp);
-	if (err == -1)
+	if (execve(path, cmd, envp) == -1)
 		error("\e[31m\e[1mCould not find program to execute!\e[0m\n");
 	return (0);
 }
@@ -92,7 +97,7 @@ int	parent_process(int argc, char *argv[], char *envp[], int fd[2])
 	if (outfile_fd == -1)
 		error("\e[31m\e[1mError while opening outfile\e[0m\n");
 	dup2(fd[FD_R], STDIN_FILENO);
-	dup2(outfile_fd, STDOUT_FILENO);
+	// dup2(outfile_fd, STDOUT_FILENO);
 	close(outfile_fd);
 	close(fd[FD_W]);
 	close(fd[FD_R]);
