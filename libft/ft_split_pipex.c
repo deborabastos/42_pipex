@@ -6,7 +6,7 @@
 /*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/30 20:53:06 by dalves-p          #+#    #+#             */
-/*   Updated: 2021/12/15 21:45:19 by coder            ###   ########.fr       */
+/*   Updated: 2021/12/15 22:38:59 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,11 +83,13 @@ char	**ft_split_pipex(char const *s, char c)
 {
 	char	**split;
 	char	*scpy;
+	char	set[2];
 
 	if (!s)
 		return (0);
-	scpy = (char *)s;
-	// scpy = ft_strtrim(s, &c);
+	set[0] = c;
+	set[1] = '\0';	
+	scpy = ft_strtrim(s, set);
 	if (!scpy)
 		return (0);
 	if (ft_strstr(scpy, "' '") != 0)
@@ -100,6 +102,6 @@ char	**ft_split_pipex(char const *s, char c)
 		return (split);
 	}
 	split = get_strs(scpy, c);
-	// free(scpy);
+	free(scpy);
 	return (split);
 }

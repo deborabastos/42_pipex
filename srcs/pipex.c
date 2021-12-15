@@ -6,7 +6,7 @@
 /*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/23 16:29:11 by dalves-p          #+#    #+#             */
-/*   Updated: 2021/12/15 21:45:53 by coder            ###   ########.fr       */
+/*   Updated: 2021/12/15 22:22:27 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int	child_process(char *argv[], char *envp[], int fd[2])
 	infile_fd = open(argv[1], O_RDONLY, 0777);
 	if (infile_fd == -1)
 		error("\e[31m\e[1mError while opening infile\e[0m\n");
-	// dup2(fd[FD_W], STDOUT_FILENO);
+	dup2(fd[FD_W], STDOUT_FILENO);
 	dup2(infile_fd, STDIN_FILENO);
 	close(infile_fd);
 	close(fd[FD_W]);
@@ -99,7 +99,7 @@ int	parent_process(int argc, char *argv[], char *envp[], int fd[2])
 	if (outfile_fd == -1)
 		error("\e[31m\e[1mError while opening outfile\e[0m\n");
 	dup2(fd[FD_R], STDIN_FILENO);
-	// dup2(outfile_fd, STDOUT_FILENO);
+	dup2(outfile_fd, STDOUT_FILENO);
 	close(outfile_fd);
 	close(fd[FD_W]);
 	close(fd[FD_R]);
