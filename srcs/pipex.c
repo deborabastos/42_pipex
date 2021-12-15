@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
+/*   By: dalves-p <dalves-p@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/23 16:29:11 by dalves-p          #+#    #+#             */
-/*   Updated: 2021/12/15 22:22:27 by coder            ###   ########.fr       */
+/*   Updated: 2021/12/15 19:28:47 by dalves-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ char	*get_path(char *envp[], char *cmd)
 		selected_path = ft_strjoin(ptr_path, cmd);
 		if (access(selected_path, F_OK) == 0)
 		{
-			return (selected_path);	
+			return (selected_path);
 		}
 		free(ptr_path);
 		free(ptr_paths[i]);
