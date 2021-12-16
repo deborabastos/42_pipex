@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split_pipex.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
+/*   By: dalves-p <dalves-p@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/30 20:53:06 by dalves-p          #+#    #+#             */
-/*   Updated: 2021/12/15 22:38:59 by coder            ###   ########.fr       */
+/*   Updated: 2021/12/15 19:32:03 by dalves-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ char	**ft_split_pipex(char const *s, char c)
 	if (!s)
 		return (0);
 	set[0] = c;
-	set[1] = '\0';	
+	set[1] = '\0';
 	scpy = ft_strtrim(s, set);
 	if (!scpy)
 		return (0);
