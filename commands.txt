@@ -1,5 +1,5 @@
 ./pipex "infile" "tr b ' '" "tr a '@'" "outfile0"
-./pipex "infile" "   tr b ' '   " "   tr a '@'  " "outfile0"
+./pipex "infile" "   tr b ' '   " "   tr a '#'  " "outfile0"
 
 < "infile" tr a b| tr b ' ' > "outfile2"
 
@@ -20,3 +20,14 @@
 ./pipex infile "cat" "catt" outfile9
 ./pipex infile "cat" "cat"
 ./pipex infile "cat" outfile9
+
+
+
+
+## Use of valgrind:
+valgrind --leak-check=full --trace-children=yes ./pipex "infile" "tr b ' '" "tr a '@'" "outfile0"
+valgrind --leak-check=full --trace-children=yes ./pipex "infile" "tr b d" "tr a x" "outfile0"
+valgrind --leak-check=full --trace-children=yes ./pipex infile "cat" "cat" outfile6
+valgrind --leak-check=full --trace-children=yes ./pipex infile "catt" "cat" outfile8
+valgrind --leak-check=full --trace-children=yes ./pipex infile "cat" "catt" outfile9
+valgrind --leak-check=full --trace-children=yes ./pipex infile "cat" "cat"
