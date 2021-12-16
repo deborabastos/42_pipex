@@ -6,15 +6,15 @@
 /*   By: dalves-p <dalves-p@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 12:55:01 by dalves-p          #+#    #+#             */
-/*   Updated: 2021/12/15 20:40:05 by dalves-p         ###   ########.fr       */
+/*   Updated: 2021/12/16 11:43:27 by dalves-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../pipex.h"
 
-int	error(char *msg)
+int	error(char *err, int code)
 {
-	// perror("Error: ");
-	write(2, msg, ft_strlen(msg));
-	exit (EXIT_FAILURE);
+	write(2, err, ft_strlen(err));
+	write(2, "\n", 1);
+	exit (code);
 }

@@ -6,7 +6,7 @@
 /*   By: dalves-p <dalves-p@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/23 16:29:11 by dalves-p          #+#    #+#             */
-/*   Updated: 2021/12/15 20:38:39 by dalves-p         ###   ########.fr       */
+/*   Updated: 2021/12/16 13:16:53 by dalves-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,7 @@ char	*get_path(char *envp[], char *cmd)
 		ptr_path = ft_strjoin(ptr_paths[i], SEPARATOR);
 		selected_path = ft_strjoin(ptr_path, cmd);
 		if (access(selected_path, F_OK) == 0)
-		{
 			return (selected_path);
-		}
 		free(ptr_path);
 		free(ptr_paths[i]);
 		free(selected_path);
@@ -77,15 +75,15 @@ int	child_process(char *argv[], char *envp[], int fd[2])
 	close(fd[FD_R]);
 	infile_fd = open(argv[1], O_RDONLY, 0777);
 	if (infile_fd == -1)
-		error("\e[31m\e[1mNo such file or directory\e[0m\n");
+		error("No such file or directory", EXIT_FAILURE);
 	dup2(fd[FD_W], STDOUT_FILENO);
 	dup2(infile_fd, STDIN_FILENO);
 	close(infile_fd);
 	close(fd[FD_W]);
 	cmd = get_cmd(argv[2]);
 	path = get_path(envp, cmd[0]);
-	execve(path, cmd, envp);
-		// error("\e[31m\e[1mcommand not found\e[0m\n");
+	if (execve(path, cmd, envp) == -1)
+		error("command not found", 127);
 	return (0);
 }
 
@@ -94,12 +92,12 @@ int	parent_process(int argc, char *argv[], char *envp[], int fd[2])
 	int		outfile_fd;
 	char	**cmd;
 	char	*path;
-	// int		err;
+	int		err;
 
 	close(fd[FD_W]);
 	outfile_fd = open(argv[argc - 1], O_WRONLY | O_CREAT | O_TRUNC, 0777);
 	if (outfile_fd == -1)
-		error("\e[31m\e[1mError while opening outfile\e[0m\n");
+		error("No such file or directory", EXIT_FAILURE);
 	dup2(fd[FD_R], STDIN_FILENO);
 	dup2(outfile_fd, STDOUT_FILENO);
 	close(outfile_fd);
@@ -107,12 +105,9 @@ int	parent_process(int argc, char *argv[], char *envp[], int fd[2])
 	close(fd[FD_R]);
 	cmd = get_cmd(argv[3]);
 	path = get_path(envp, cmd[0]);
-	execve(path, cmd, envp);
-	// if (err == -1)
-	// {
-	// 	unlink(argv[argc - 1]);
-	// 	error("\e[31m\e[1mcommand not found\e[0m\n");
-	// }
+	err = execve(path, cmd, envp);
+	if (err == -1)
+		error("command not found", 127);
 	return (0);
 }
 
@@ -120,29 +115,20 @@ int	main(int argc, char *argv[], char *envp[])
 {
 	int		fd[2];
 	int		pid;
-	int		wstatus;
 
 	if (argc == 5)
 	{
 		if (pipe(fd) == -1)
-			error("\e[31m\e[1mError while opening the pipe\e[0m\n");
+			error("Error while calling pipe", EXIT_FAILURE);
 		pid = fork();
 		if (pid == -1)
-			error("\e[31m\e[1mError while forking\e[0m\n");
+			error("Error while calling fork", EXIT_FAILURE);
 		if (pid == 0)
 			child_process(argv, envp, fd);
 		else
-		{
-			wait(&wstatus);
-			if (WEXITSTATUS(wstatus) == 0)
-			{
-				parent_process(argc, argv, envp, fd);
-				return (0);
-			}
-		}		
-		exit (EXIT_FAILURE);
+			parent_process(argc, argv, envp, fd);
 	}
 	else
-		error("\e[31m\e[1mError: check your arguments\n\
-Ex: ./pipex <infile> <cmd1> <cmd2> <outfile>\e[0m\n");
+		error("Error: check your arguments\n\
+usage: ./pipex <infile> <cmd1> <cmd2> <outfile>", EXIT_FAILURE);
 }
