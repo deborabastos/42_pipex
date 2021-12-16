@@ -6,11 +6,9 @@
 /*   By: dalves-p <dalves-p@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/23 16:29:11 by dalves-p          #+#    #+#             */
-/*   Updated: 2021/12/16 13:16:53 by dalves-p         ###   ########.fr       */
+/*   Updated: 2021/12/16 14:56:50 by dalves-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-// ### TRABALHANDO AQUI EM GESTAO DE ERROR
 
 #include "../pipex.h"
 
@@ -34,22 +32,12 @@ char	**get_cmd(char *cmds)
 
 char	*get_path(char *envp[], char *cmd)
 {
-	char	*path;
-	char	*full_path;
 	char	**ptr_paths;
 	char	*ptr_path;
 	char	*selected_path;
 	int		i;
 
-	while (*envp)
-	{
-		if (ft_strstr(*envp, "PATH") != 0)
-			path = *envp;
-		envp++;
-	}
-	full_path = ft_strtrim(path, "PATH=");
-	ptr_paths = ft_split_pipex(full_path, ':');
-	free(full_path);
+	ptr_paths = get_full_path(envp);
 	i = 0;
 	while (ptr_paths[i])
 	{

@@ -6,7 +6,7 @@
 /*   By: dalves-p <dalves-p@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/23 16:29:46 by dalves-p          #+#    #+#             */
-/*   Updated: 2021/12/16 11:36:06 by dalves-p         ###   ########.fr       */
+/*   Updated: 2021/12/16 14:57:11 by dalves-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ typedef struct s_pipex
 
 int		error(char *err, int code);
 char	**ft_split_pipex(char const *s, char c);
+char	**get_full_path(char *envp[]);
 
 /*
 ** LIBFT
