@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   pipex_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dalves-p <dalves-p@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/23 16:29:46 by dalves-p          #+#    #+#             */
-/*   Updated: 2021/12/16 19:20:25 by dalves-p         ###   ########.fr       */
+/*   Updated: 2021/12/16 19:21:54 by dalves-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
+#ifndef PIPEX_BONUS_H
+# define PIPEX_BONUS_H
 
 # include <unistd.h>
 # include <fcntl.h>
@@ -30,6 +30,15 @@
 # else
 #  define SEPARATOR	"/"
 # endif
+
+typedef struct s_pipex
+{
+	int		argc;
+	int		cmds_num;
+	char	**cmds;
+	char	*infile;
+	char	*outfile;
+}	t_pipex;
 
 /*
 ** FUNCTIONS PROTOTYPE

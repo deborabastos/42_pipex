@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.c                                            :+:      :+:    :+:   */
+/*   pipex_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
+/*   By: dalves-p <dalves-p@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/23 16:29:11 by dalves-p          #+#    #+#             */
-/*   Updated: 2021/12/16 19:43:43 by coder            ###   ########.fr       */
+/*   Updated: 2021/12/16 19:19:24 by dalves-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../pipex.h"
+#include "../pipex_bonus.h"
 
 char	**get_cmd(char *cmds)
 {
@@ -104,7 +104,7 @@ int	main(int argc, char *argv[], char *envp[])
 	int		fd[2];
 	int		pid;
 
-	if (argc == 5)
+	if (argc >= 5)
 	{
 		if (pipe(fd) == -1)
 			error("Error while calling pipe", EXIT_FAILURE);
@@ -118,5 +118,5 @@ int	main(int argc, char *argv[], char *envp[])
 	}
 	else
 		error("Error: check your arguments\n\
-usage: ./pipex <infile> <cmd1> <cmd2> <outfile>", EXIT_FAILURE);
+usage: ./pipex <infile> <cmd1> <cmd2> ... <cmdn> <outfile>", EXIT_FAILURE);
 }
