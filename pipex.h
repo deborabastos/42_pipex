@@ -6,7 +6,7 @@
 /*   By: dalves-p <dalves-p@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/23 16:29:46 by dalves-p          #+#    #+#             */
-/*   Updated: 2021/12/16 19:20:25 by dalves-p         ###   ########.fr       */
+/*   Updated: 2021/12/17 08:12:52 by dalves-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ char	**get_full_path(char *envp[]);
 /*
 ** LIBFT
 */
+
 char	*ft_strstr(char *haystack, char *needle);
 
 int		ft_isalpha(int c);

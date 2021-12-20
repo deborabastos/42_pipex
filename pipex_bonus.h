@@ -6,7 +6,7 @@
 /*   By: dalves-p <dalves-p@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/23 16:29:46 by dalves-p          #+#    #+#             */
-/*   Updated: 2021/12/16 19:21:54 by dalves-p         ###   ########.fr       */
+/*   Updated: 2021/12/17 09:36:00 by dalves-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,11 @@
 typedef struct s_pipex
 {
 	int		argc;
-	int		cmds_num;
+	int		count_cmds;
 	char	**cmds;
 	char	*infile;
 	char	*outfile;
+	char	**paths;
 }	t_pipex;
 
 /*
@@ -46,13 +47,14 @@ typedef struct s_pipex
 
 int		error(char *err, int code);
 char	**ft_split_pipex(char const *s, char c);
-char	**get_full_path(char *envp[]);
+char	**get_cmd(char *cmds);
+char	*get_path(char **ptr_paths, char *cmd);
 
 /*
 ** LIBFT
 */
-char	*ft_strstr(char *haystack, char *needle);
 
+char	*ft_strstr(char *haystack, char *needle);
 int		ft_isalpha(int c);
 int		ft_isdigit(int c);
 int		ft_isalnum(int c);

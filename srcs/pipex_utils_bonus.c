@@ -6,7 +6,7 @@
 /*   By: dalves-p <dalves-p@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 12:55:01 by dalves-p          #+#    #+#             */
-/*   Updated: 2021/12/16 19:19:28 by dalves-p         ###   ########.fr       */
+/*   Updated: 2021/12/17 09:35:57 by dalves-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,20 +19,42 @@ int	error(char *err, int code)
 	exit (code);
 }
 
-char	**get_full_path(char *envp[])
+char	**get_cmd(char *cmds)
 {
-	char	*env_paths;
-	char	*full_path;
-	char	**ptr_paths;
+	char	**cmd;
+	int		i;
 
-	while (*envp)
+	cmd = ft_split_pipex(cmds, ' ');
+	i = 0;
+	while (cmd[i])
 	{
-		if (ft_strstr(*envp, "PATH") != 0)
-			env_paths = *envp;
-		envp++;
+		if (ft_strstr(cmd[i], "'") != 0)
+		{
+			cmd[i] = ft_strtrim(cmd[i], "'");
+		}
+		i++;
 	}
-	full_path = ft_strtrim(env_paths, "PATH=");
-	ptr_paths = ft_split_pipex(full_path, ':');
-	free(full_path);
-	return (ptr_paths);
+	return (cmd);
+}
+
+char	*get_path(char **ptr_paths, char *cmd)
+{
+	char	*ptr_path;
+	char	*selected_path;
+	int		i;
+
+	i = 0;
+	while (ptr_paths[i])
+	{
+		ptr_path = ft_strjoin(ptr_paths[i], SEPARATOR);
+		selected_path = ft_strjoin(ptr_path, cmd);
+		if (access(selected_path, F_OK) == 0)
+			return (selected_path);
+		free(ptr_path);
+		free(ptr_paths[i]);
+		free(selected_path);
+		i++;
+	}
+	free(ptr_paths);
+	return (cmd);
 }
