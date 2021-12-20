@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: coder <coder@student.42.fr>                +#+  +:+       +#+         #
+#    By: dalves-p <dalves-p@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/23 16:30:23 by dalves-p          #+#    #+#              #
-#    Updated: 2021/12/16 19:16:12 by coder            ###   ########.fr        #
+#    Updated: 2021/12/20 13:36:37 by dalves-p         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,8 +15,8 @@ CC			=	cc
 SRCS		=	srcs/pipex.c \
 				srcs/pipex_utils.c \
 
-SRCS_BONUS		=	srcs/pipex_bonus.c \
-				srcs/pipex_utils_bonus.c \
+SRCS_BONUS		=	srcs_bonus/pipex_bonus.c \
+					srcs_bonus/pipex_utils_bonus.c \
 
 SRCS_LIB	=	libft/ft_strstr.c \
 				libft/ft_strlen.c \
