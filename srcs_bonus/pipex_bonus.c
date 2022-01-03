@@ -6,7 +6,7 @@
 /*   By: dalves-p <dalves-p@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/23 16:29:11 by dalves-p          #+#    #+#             */
-/*   Updated: 2021/12/20 16:22:34 by dalves-p         ###   ########.fr       */
+/*   Updated: 2021/12/27 11:05:17 by dalves-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,16 @@
 
 int	child_process(char *envp[], t_pipex pipex, int fd[2])
 {
+	int		i;
 	int		infile_fd;
 	char	**cmd;
 	char	*path;
-
-	close(fd[FD_R]);
+	
+	i = -1;
+	while (++i < pipex.count_cmds + 1)
+	{
+		close(fd[i][FD_R]);
+	}
 	infile_fd = open(pipex.infile, O_RDONLY, 0777);
 	if (infile_fd == -1)
 		error("No such file or directory", EXIT_FAILURE);
@@ -92,21 +97,30 @@ t_pipex	init(int argc, char *argv[], char *envp[])
 int	main(int argc, char *argv[], char *envp[])
 {
 	t_pipex	pipex;
-	int		fd[2];
-	int		pid;
+	int		pipe_fd[argc + 1][2];
+	int		pid[argc];
+	int		i;
 
 	pipex = init(argc, argv, envp);
 	if (argc >= 5)
 	{
-		if (pipe(fd) == -1)
-			error("Error while calling pipe", EXIT_FAILURE);
-		pid = fork();
-		if (pid == -1)
-			error("Error while calling fork", EXIT_FAILURE);
-		if (pid == 0)
-			child_process(envp, pipex, fd);
-		else
-			parent_process(envp, pipex, fd);
+		i = -1;
+		while (++i < pipex.count_cmds + 1)
+		{
+			if (pipe(pipe_fd[i]) == -1)
+				error("Error while calling pipe", EXIT_FAILURE);
+		}
+		i = -1;
+		while (++i < pipex.count_cmds)
+		{
+			pid[i] = fork();
+			if (pid[i] == -1)
+				error("Error while calling fork", EXIT_FAILURE);
+			if (pid[i] == 0)
+				child_process(envp, pipex, pipe_fd[i]);
+			else
+				parent_process(envp, pipex, pipe_fd[i]);
+		}
 	}
 	else
 		error("Error: check your arguments\n\
