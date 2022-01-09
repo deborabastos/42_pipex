@@ -1,5 +1,5 @@
 ./pipex "infile" "tr b ' '" "tr a '@'" "outfile0"
-./pipex "infile" "   tr b ' '   " "   tr a '#'  " "outfile0"
+./pipex "infile" "   tr b ' '   " "   tr a '#'  " "outfile00"
 
 < "infile" tr a b| tr b ' ' > "outfile2"
 

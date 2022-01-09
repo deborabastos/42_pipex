@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
+/*   By: dalves-p <dalves-p@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/23 16:29:11 by dalves-p          #+#    #+#             */
-/*   Updated: 2021/12/16 19:43:43 by coder            ###   ########.fr       */
+/*   Updated: 2022/01/09 17:51:12 by dalves-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,6 @@ int	parent_process(int argc, char *argv[], char *envp[], int fd[2])
 	int		outfile_fd;
 	char	**cmd;
 	char	*path;
-	int		err;
 
 	close(fd[FD_W]);
 	outfile_fd = open(argv[argc - 1], O_WRONLY | O_CREAT | O_TRUNC, 0777);
@@ -89,12 +88,11 @@ int	parent_process(int argc, char *argv[], char *envp[], int fd[2])
 	dup2(fd[FD_R], STDIN_FILENO);
 	dup2(outfile_fd, STDOUT_FILENO);
 	close(outfile_fd);
-	close(fd[FD_W]);
+	// close(fd[FD_W]);
 	close(fd[FD_R]);
 	cmd = get_cmd(argv[3]);
 	path = get_path(envp, cmd[0]);
-	err = execve(path, cmd, envp);
-	if (err == -1)
+	if (execve(path, cmd, envp) == -1)
 		error("command not found", 127);
 	return (0);
 }
@@ -114,7 +112,10 @@ int	main(int argc, char *argv[], char *envp[])
 		if (pid == 0)
 			child_process(argv, envp, fd);
 		else
+		{
+			wait(NULL); // Se deixar não dá timeout
 			parent_process(argc, argv, envp, fd);
+		}
 	}
 	else
 		error("Error: check your arguments\n\

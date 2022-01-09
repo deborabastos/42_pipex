@@ -6,7 +6,7 @@
 /*   By: dalves-p <dalves-p@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/23 16:29:11 by dalves-p          #+#    #+#             */
-/*   Updated: 2021/12/27 11:05:17 by dalves-p         ###   ########.fr       */
+/*   Updated: 2022/01/09 19:24:36 by dalves-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,11 @@
 
 int	child_process(char *envp[], t_pipex pipex, int fd[2])
 {
-	int		i;
 	int		infile_fd;
 	char	**cmd;
 	char	*path;
 	
-	i = -1;
-	while (++i < pipex.count_cmds + 1)
-	{
-		close(fd[i][FD_R]);
-	}
+	close(fd[FD_R]);
 	infile_fd = open(pipex.infile, O_RDONLY, 0777);
 	if (infile_fd == -1)
 		error("No such file or directory", EXIT_FAILURE);
@@ -52,7 +47,7 @@ int	parent_process(char *envp[], t_pipex pipex, int fd[2])
 	dup2(fd[FD_R], STDIN_FILENO);
 	dup2(outfile_fd, STDOUT_FILENO);
 	close(outfile_fd);
-	close(fd[FD_W]);
+	// close(fd[FD_W]);
 	close(fd[FD_R]);
 	cmd = get_cmd(pipex.cmds[1]);
 	path = get_path(pipex.paths, cmd[0]);
@@ -97,8 +92,8 @@ t_pipex	init(int argc, char *argv[], char *envp[])
 int	main(int argc, char *argv[], char *envp[])
 {
 	t_pipex	pipex;
-	int		pipe_fd[argc + 1][2];
-	int		pid[argc];
+	int		pipe_fd[200][2];
+	int		pid[200];
 	int		i;
 
 	pipex = init(argc, argv, envp);
@@ -119,7 +114,10 @@ int	main(int argc, char *argv[], char *envp[])
 			if (pid[i] == 0)
 				child_process(envp, pipex, pipe_fd[i]);
 			else
+			{
+				wait(NULL);
 				parent_process(envp, pipex, pipe_fd[i]);
+			}
 		}
 	}
 	else
