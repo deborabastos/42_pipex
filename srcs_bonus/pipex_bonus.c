@@ -115,7 +115,7 @@ int	main(int argc, char *argv[], char *envp[])
 				child_process(envp, pipex, pipe_fd[i]);
 			else
 			{
-				wait(NULL);
+				//wait(NULL);
 				parent_process(envp, pipex, pipe_fd[i]);
 			}
 		}

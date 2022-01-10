@@ -71,7 +71,11 @@ int	child_process(char *argv[], char *envp[], int fd[2])
 	cmd = get_cmd(argv[2]);
 	path = get_path(envp, cmd[0]);
 	if (execve(path, cmd, envp) == -1)
+	{
+		free(cmd);
 		error("command not found", 127);
+	}
+	free(cmd);
 	return (0);
 }
 
@@ -88,12 +92,15 @@ int	parent_process(int argc, char *argv[], char *envp[], int fd[2])
 	dup2(fd[FD_R], STDIN_FILENO);
 	dup2(outfile_fd, STDOUT_FILENO);
 	close(outfile_fd);
-	// close(fd[FD_W]);
 	close(fd[FD_R]);
 	cmd = get_cmd(argv[3]);
 	path = get_path(envp, cmd[0]);
 	if (execve(path, cmd, envp) == -1)
+	{
+		free(cmd);
 		error("command not found", 127);
+	}
+	free(cmd);
 	return (0);
 }
 
@@ -113,7 +120,7 @@ int	main(int argc, char *argv[], char *envp[])
 			child_process(argv, envp, fd);
 		else
 		{
-			wait(NULL); // Se deixar não dá timeout
+			//wait(NULL); // Se deixar não dá timeout
 			parent_process(argc, argv, envp, fd);
 		}
 	}
