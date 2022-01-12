@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dalves-p <dalves-p@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/23 16:29:11 by dalves-p          #+#    #+#             */
-/*   Updated: 2022/01/09 17:51:12 by dalves-p         ###   ########.fr       */
+/*   Updated: 2022/01/12 15:53:33 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,7 @@ int	main(int argc, char *argv[], char *envp[])
 			child_process(argv, envp, fd);
 		else
 		{
-			//wait(NULL); // Se deixar não dá timeout
+			wait(NULL); // Se deixar não dá timeout, se não usar, o valgrind trava quando tem erro no segundo cmd 
 			parent_process(argc, argv, envp, fd);
 		}
 	}

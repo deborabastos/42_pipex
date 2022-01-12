@@ -27,10 +27,10 @@
 ## Use of valgrind:
 valgrind --leak-check=full --trace-children=yes ./pipex "infile" "tr b ' '" "tr a '@'" "outfile0"
 valgrind --leak-check=full --trace-children=yes ./pipex "infile" "tr b d" "tr a x" "outfile0"
-valgrind --leak-check=full --trace-children=yes ./pipex infile "cat" "cat" outfile6
-valgrind --leak-check=full --show-leak-kinds=all --trace-children=yes ./pipex infile "catt" "cat" outfile8
-valgrind --leak-check=full --show-leak-kinds=all --trace-children=yes ./pipex infile "cat" "catt" outfile9
-valgrind --leak-check=full --trace-children=yes ./pipex infile "cat" "cat"
+valgrind --leak-check=full --trace-children=yes -s ./pipex infile "cat" "cat" outfile6
+valgrind --leak-check=full --show-leak-kinds=all --trace-children=yes -s ./pipex infile "catt" "cat" outfile8
+valgrind --leak-check=full --show-leak-kinds=all --trace-children=yes -s ./pipex infile "cat" "catt" outfile9
+valgrind --leak-check=full --trace-children=yes -s ./pipex infile "cat" "cat"
 
 
 
