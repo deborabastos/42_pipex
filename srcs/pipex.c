@@ -6,7 +6,7 @@
 /*   By: dalves-p <dalves-p@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/23 16:29:11 by dalves-p          #+#    #+#             */
-/*   Updated: 2022/01/13 23:32:59 by dalves-p         ###   ########.fr       */
+/*   Updated: 2022/01/14 00:08:21 by dalves-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ int	child_process(char *argv[], char *envp[], int fd[2])
 	path = get_path(envp, cmd[0]);
 	if (execve(path, cmd, envp) == -1)
 	{
-		free_ptrptr(cmd);
+		ft_free_ptrptr(cmd);
 		error("command not found", 127);
 	}
 	return (0);
@@ -96,7 +96,7 @@ int	parent_process(int argc, char *argv[], char *envp[], int fd[2])
 	path = get_path(envp, cmd[0]);
 	if (execve(path, cmd, envp) == -1)
 	{
-		free_ptrptr(cmd);
+		ft_free_ptrptr(cmd);
 		error("command not found", 127);
 	}
 	return (0);

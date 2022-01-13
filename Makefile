@@ -6,7 +6,7 @@
 #    By: dalves-p <dalves-p@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/23 16:30:23 by dalves-p          #+#    #+#              #
-#    Updated: 2022/01/13 01:21:20 by dalves-p         ###   ########.fr        #
+#    Updated: 2022/01/14 00:07:53 by dalves-p         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,6 +32,7 @@ SRCS_LIB	=	libft/ft_strstr.c \
 				libft/ft_strjoin.c \
 				libft/ft_putstr_fd.c \
 				libft/ft_strcmp.c \
+				libft/ft_free_ptrptr.c \
 
 				# libft/ft_memset.c \
 				# libft/ft_bzero.c \

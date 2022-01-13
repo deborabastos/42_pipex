@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
+/*   By: dalves-p <dalves-p@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 17:13:34 by dalves-p          #+#    #+#             */
-/*   Updated: 2021/12/15 20:07:18 by coder            ###   ########.fr       */
+/*   Updated: 2022/01/14 00:08:14 by dalves-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,5 +160,6 @@ size_t	ft_count_words(char const *s, char c);
 void	ft_putlnbr(long long int n);
 char	*ft_utoa_base(unsigned int n, char *base);
 char	*ft_strrev(char *str);
+void 	ft_free_ptrptr(char **cmd);
 
 #endif

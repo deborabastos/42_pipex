@@ -6,7 +6,7 @@
 /*   By: dalves-p <dalves-p@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/23 16:29:46 by dalves-p          #+#    #+#             */
-/*   Updated: 2022/01/13 23:34:22 by dalves-p         ###   ########.fr       */
+/*   Updated: 2022/01/14 00:15:37 by dalves-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,5 +126,6 @@ size_t	ft_count_words(char const *s, char c);
 void	ft_putlnbr(long long int n);
 char	*ft_utoa_base(unsigned int n, char *base);
 char	*ft_strrev(char *str);
+void 	ft_free_ptrptr(char **cmd);
 
 #endif
