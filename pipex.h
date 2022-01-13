@@ -6,7 +6,7 @@
 /*   By: dalves-p <dalves-p@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/23 16:29:46 by dalves-p          #+#    #+#             */
-/*   Updated: 2021/12/17 08:12:52 by dalves-p         ###   ########.fr       */
+/*   Updated: 2022/01/13 23:17:07 by dalves-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@
 int		error(char *err, int code);
 char	**ft_split_pipex(char const *s, char c);
 char	**get_full_path(char *envp[]);
+void free_ptrptr(char **cmd);
 
 /*
 ** LIBFT

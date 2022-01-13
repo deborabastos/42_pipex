@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
+/*   By: dalves-p <dalves-p@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/23 16:29:11 by dalves-p          #+#    #+#             */
-/*   Updated: 2022/01/12 15:53:33 by coder            ###   ########.fr       */
+/*   Updated: 2022/01/13 23:32:59 by dalves-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,10 +72,9 @@ int	child_process(char *argv[], char *envp[], int fd[2])
 	path = get_path(envp, cmd[0]);
 	if (execve(path, cmd, envp) == -1)
 	{
-		free(cmd);
+		free_ptrptr(cmd);
 		error("command not found", 127);
 	}
-	free(cmd);
 	return (0);
 }
 
@@ -97,10 +96,9 @@ int	parent_process(int argc, char *argv[], char *envp[], int fd[2])
 	path = get_path(envp, cmd[0]);
 	if (execve(path, cmd, envp) == -1)
 	{
-		free(cmd);
+		free_ptrptr(cmd);
 		error("command not found", 127);
 	}
-	free(cmd);
 	return (0);
 }
 
@@ -120,7 +118,7 @@ int	main(int argc, char *argv[], char *envp[])
 			child_process(argv, envp, fd);
 		else
 		{
-			wait(NULL); // Se deixar não dá timeout, se não usar, o valgrind trava quando tem erro no segundo cmd 
+			waitpid(-1, NULL, WNOHANG);
 			parent_process(argc, argv, envp, fd);
 		}
 	}

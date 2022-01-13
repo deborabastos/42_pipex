@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: coder <coder@student.42.fr>                +#+  +:+       +#+         #
+#    By: dalves-p <dalves-p@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/23 16:30:23 by dalves-p          #+#    #+#              #
-#    Updated: 2022/01/12 22:45:43 by coder            ###   ########.fr        #
+#    Updated: 2022/01/13 01:21:20 by dalves-p         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -110,11 +110,13 @@ OBJS_LIB	=	$(SRCS_LIB:%.c=%.o)
 
 all:		$(NAME)
 
+# clang -Wall -Wextra -Werror -g3 -fsanitize=address
+
 $(NAME):	$(OBJS) $(OBJS_LIB)
 			$(CC) $(OBJS) $(OBJS_LIB) $(CFLAGS) -o $(NAME)
 
-%o:			%.c
-			$(CC) $(CFLAGS) -c $< -o $@
+# .c.o		%o : %.c
+# 			$(CC) $(CFLAGS) -c $< -o $@
 
 bonus:		$(OBJS_BONUS) $(OBJS_LIB)
 			$(CC) $(OBJS_BONUS) $(OBJS_LIB) $(CFLAGS) -o $(NAME)

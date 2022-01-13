@@ -6,7 +6,7 @@
 /*   By: dalves-p <dalves-p@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 12:55:01 by dalves-p          #+#    #+#             */
-/*   Updated: 2021/12/17 09:35:57 by dalves-p         ###   ########.fr       */
+/*   Updated: 2022/01/13 23:34:15 by dalves-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,4 +57,14 @@ char	*get_path(char **ptr_paths, char *cmd)
 	}
 	free(ptr_paths);
 	return (cmd);
+}
+
+void free_ptrptr(char **cmd)
+{
+	int	i;
+
+	i = -1;
+	while (cmd[++i] != NULL)
+		free(cmd[i]);
+	free(cmd);
 }
