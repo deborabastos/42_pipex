@@ -6,7 +6,7 @@
 /*   By: dalves-p <dalves-p@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/23 16:29:11 by dalves-p          #+#    #+#             */
-/*   Updated: 2022/01/14 00:08:21 by dalves-p         ###   ########.fr       */
+/*   Updated: 2022/01/17 19:46:16 by dalves-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,14 +42,23 @@ char	*get_path(char *envp[], char *cmd)
 	while (ptr_paths[i])
 	{
 		ptr_path = ft_strjoin(ptr_paths[i], SEPARATOR);
-		selected_path = ft_strjoin(ptr_path, cmd);
-		if (access(selected_path, F_OK) == 0)
-			return (selected_path);
-		free(ptr_path);
 		free(ptr_paths[i]);
+		selected_path = ft_strjoin(ptr_path, cmd);
+		free(ptr_path);		
+		if (access(selected_path, F_OK) == 0)
+		{
+			while (ptr_paths[i+1] != NULL)
+			{
+				free(ptr_paths[i+1]);
+				i++;
+			}
+			free(ptr_paths);
+			return (selected_path);
+		}
 		free(selected_path);
 		i++;
 	}
+	free(ptr_paths[i]);
 	free(ptr_paths);
 	return (cmd);
 }
