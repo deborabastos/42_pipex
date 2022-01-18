@@ -1,5 +1,18 @@
+
+!!!!!!!!!!!!!!!!!!!!!   NOT WORKING   !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+./pipex "infile" "tr Débora '  .  '" "tr a '@'" "outfile0"
+< "infile" tr Débora "  .  "| tr a '@' > "outfile2"
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+
+
 ./pipex "infile" "tr b ' '" "tr a '@'" "outfile0"
 ./pipex "infile" "   tr b ' '   " "   tr a '#'  " "outfile00"
+
+#sempre achar espaço troca por 1
+
+./pipex "infile" "tr -d' '" "tr a '@'" "outfile0"
+< "infile" tr -d' '| tr b ' ' > "outfile2"
 
 < "infile" tr a b| tr b ' ' > "outfile2"
 

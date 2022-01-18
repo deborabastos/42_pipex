@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split_pipex.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dalves-p <dalves-p@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/30 20:53:06 by dalves-p          #+#    #+#             */
-/*   Updated: 2021/12/16 15:58:20 by dalves-p         ###   ########.fr       */
+/*   Updated: 2022/01/18 19:21:57 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,22 +22,54 @@
 **	the allocation fails.
 */
 
-char	**undo_space(char **split)
-{
-	size_t	j;
 
-	j = 0;
-	while (split[j])
+static void	undo_space(char ***split)
+{
+	int	i;
+	int j;
+	
+	i = -1;
+	while ((*split)[++i] != NULL)
 	{
-		if (ft_strcmp(split[j], "#$@") == 0)
+		j = -1;
+		while ((*split)[i][++j])
 		{
-			split[j][0] = '\'';
-			split[j][1] = ' ';
-			split[j][2] = '\'';
+			if ((*split)[i][j] ==  1)
+				(*split)[i][j] = ' ';
 		}
-		j++;
 	}
-	return (split);
+}
+
+static void	check_spaces(char **str)
+{
+	int	i;
+
+	i = 0;
+
+	// printf("1 %s\n", *str);
+	while ((*str)[i] != '\0')
+	{
+		// printf("%i %c\n", i, (*str)[i]);
+		if ((*str)[i] == '\'')
+		{
+			while ((*str)[++i] != '\'' && (*str)[i] != '\0')
+			{
+				if ((*str)[i] ==  ' ')
+					(*str)[i] = 1;
+				i++;
+			}
+		}
+		if ((*str)[i] == '\"')
+		{
+			while ((*str)[++i] != '\"' && (*str)[i] != '\0')
+			{
+				if (((*str)[i]) ==  1)
+					(*str)[i] = 1;
+				i++;	
+			}
+		}
+		i++;
+	}
 }
 
 static char	**get_strs(char const *s, char c)
@@ -65,18 +97,8 @@ static char	**get_strs(char const *s, char c)
 	}
 	split[j] = ft_substr(s, index, (i - index));
 	split[++j] = NULL;
-	split = undo_space(split);
+	undo_space(&split);
 	return (split);
-}
-
-void	check_spaces(char **str)
-{
-	char	*ptr;
-
-	ptr = ft_strstr(*str, "' '");
-	ptr[0] = '#';
-	ptr[1] = '$';
-	ptr[2] = '@';
 }
 
 char	**ft_split_pipex(char const *s, char c)
@@ -92,8 +114,8 @@ char	**ft_split_pipex(char const *s, char c)
 	scpy = ft_strtrim(s, set);
 	if (!scpy)
 		return (0);
-	if (ft_strstr(scpy, "' '") != 0)
-		check_spaces(&scpy);
+	check_spaces(&scpy);
+	// printf("3 %s\n", scpy);
 	if (ft_count_words(scpy, c) == 0)
 	{
 		split = malloc(1 * sizeof(char *));

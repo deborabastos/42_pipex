@@ -6,7 +6,7 @@
 #    By: dalves-p <dalves-p@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/23 16:30:23 by dalves-p          #+#    #+#              #
-#    Updated: 2022/01/14 00:07:53 by dalves-p         ###   ########.fr        #
+#    Updated: 2022/01/17 19:49:01 by dalves-p         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -102,7 +102,7 @@ SRCS_LIB	=	libft/ft_strstr.c \
 				# libft/ft_count_digit.c \
 				# libft/ft_gnl.c \
 
-CFLAGS		=	-Wall -Wextra -Werror # -g3 -fsanitize=address
+CFLAGS		=	-Wall -Wextra -Werror -g3 # -fsanitize=address
 RM			=	rm -f
 OBJS		=	$(SRCS:%.c=%.o)
 OBJS_BONUS	=	$(SRCS_BONUS:%.c=%.o)

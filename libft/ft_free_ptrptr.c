@@ -6,7 +6,7 @@
 /*   By: dalves-p <dalves-p@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/29 21:04:23 by dalves-p          #+#    #+#             */
-/*   Updated: 2022/01/14 00:08:08 by dalves-p         ###   ########.fr       */
+/*   Updated: 2022/01/17 21:09:13 by dalves-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,10 @@ void ft_free_ptrptr(char **cmd)
 
 	i = -1;
 	while (cmd[++i] != NULL)
+	{
 		free(cmd[i]);
+		cmd[i] = NULL;
+	}
 	free(cmd);
+	cmd = NULL;
 }

@@ -6,7 +6,7 @@
 /*   By: dalves-p <dalves-p@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/30 19:17:10 by dalves-p          #+#    #+#             */
-/*   Updated: 2022/01/14 01:03:03 by dalves-p         ###   ########.fr       */
+/*   Updated: 2022/01/17 19:51:24 by dalves-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	{
 		ptr = ft_strdup(s2);
 		return (ptr);
-	}	
+	}
 	ptr = (char *)malloc((len_s1 + len_s2 + 1) * sizeof(char));
 	if (!ptr)
 		return (0);

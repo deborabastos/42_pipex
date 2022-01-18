@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dalves-p <dalves-p@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/23 16:29:11 by dalves-p          #+#    #+#             */
-/*   Updated: 2022/01/17 19:46:16 by dalves-p         ###   ########.fr       */
+/*   Updated: 2022/01/18 19:13:40 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ char	**get_cmd(char *cmds)
 {
 	char	**cmd;
 	int		i;
-
+	
 	cmd = ft_split_pipex(cmds, ' ');
 	i = 0;
 	while (cmd[i])
@@ -81,6 +81,8 @@ int	child_process(char *argv[], char *envp[], int fd[2])
 	path = get_path(envp, cmd[0]);
 	if (execve(path, cmd, envp) == -1)
 	{
+		if (path != cmd[0])
+			free(path);
 		ft_free_ptrptr(cmd);
 		error("command not found", 127);
 	}
@@ -105,6 +107,8 @@ int	parent_process(int argc, char *argv[], char *envp[], int fd[2])
 	path = get_path(envp, cmd[0]);
 	if (execve(path, cmd, envp) == -1)
 	{
+		if (path != cmd[0])
+			free(path);
 		ft_free_ptrptr(cmd);
 		error("command not found", 127);
 	}
