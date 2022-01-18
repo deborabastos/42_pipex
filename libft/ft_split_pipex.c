@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split_pipex.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
+/*   By: dalves-p <dalves-p@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/30 20:53:06 by dalves-p          #+#    #+#             */
-/*   Updated: 2022/01/18 19:21:57 by coder            ###   ########.fr       */
+/*   Updated: 2022/01/18 17:03:32 by dalves-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ static void	check_spaces(char **str)
 			{
 				if ((*str)[i] ==  ' ')
 					(*str)[i] = 1;
-				i++;
 			}
 		}
 		if ((*str)[i] == '\"')
@@ -65,7 +64,6 @@ static void	check_spaces(char **str)
 			{
 				if (((*str)[i]) ==  1)
 					(*str)[i] = 1;
-				i++;	
 			}
 		}
 		i++;
