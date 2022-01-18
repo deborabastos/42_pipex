@@ -1,9 +1,6 @@
 
-!!!!!!!!!!!!!!!!!!!!!   NOT WORKING   !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-./pipex "infile" "tr Débora '  .  '" "tr a '@'" "outfile0"
+./pipex "infile" "tr Débor '  . '" "tr a '@'" "outfile0"
 < "infile" tr Débora "  .  "| tr a '@' > "outfile2"
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
 
 
 ./pipex "infile" "tr b ' '" "tr a '@'" "outfile0"
@@ -15,6 +12,14 @@
 < "infile" tr -d' '| tr b ' ' > "outfile2"
 
 < "infile" tr a b| tr b ' ' > "outfile2"
+
+
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+./pipex infile  outfile
+< infile > outfile2
+
+
 
 
 # VM não tem ping instalado
@@ -36,13 +41,16 @@
 
 
 
-
 ## Use of valgrind:
 valgrind --leak-check=full --trace-children=yes ./pipex "infile" "tr b ' '" "tr a '@'" "outfile0"
 valgrind --leak-check=full --trace-children=yes -s ./pipex infile "cat" "cat" outfile6
 valgrind --leak-check=full --show-leak-kinds=all --trace-children=yes -s ./pipex infile "blah" "cat" outfile8
 valgrind --leak-check=full --show-leak-kinds=all --trace-children=yes -s ./pipex infile "cat" "blah" outfile9
 valgrind --leak-check=full --trace-children=yes -s ./pipex infile "cat" "cat"
+
+
+
+valgrind --leak-check=full --trace-children=yes -s ./pipex "infile" "tr Débor '  . '" "tr a '@'" "outfile0"
 
 
 
