@@ -6,7 +6,7 @@
 /*   By: dalves-p <dalves-p@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/30 20:53:06 by dalves-p          #+#    #+#             */
-/*   Updated: 2022/01/18 17:03:32 by dalves-p         ###   ########.fr       */
+/*   Updated: 2022/01/18 18:07:18 by dalves-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,8 @@ static void	check_spaces(char **str)
 
 	i = 0;
 
-	// printf("1 %s\n", *str);
 	while ((*str)[i] != '\0')
 	{
-		// printf("%i %c\n", i, (*str)[i]);
 		if ((*str)[i] == '\'')
 		{
 			while ((*str)[++i] != '\'' && (*str)[i] != '\0')
