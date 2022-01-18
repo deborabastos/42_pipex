@@ -6,7 +6,7 @@
 /*   By: dalves-p <dalves-p@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/30 20:53:06 by dalves-p          #+#    #+#             */
-/*   Updated: 2022/01/18 18:07:18 by dalves-p         ###   ########.fr       */
+/*   Updated: 2022/01/18 18:23:06 by dalves-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,19 +22,18 @@
 **	the allocation fails.
 */
 
-
 static void	undo_space(char ***split)
 {
 	int	i;
-	int j;
-	
+	int	j;
+
 	i = -1;
 	while ((*split)[++i] != NULL)
 	{
 		j = -1;
 		while ((*split)[i][++j])
 		{
-			if ((*split)[i][j] ==  1)
+			if ((*split)[i][j] == 1)
 				(*split)[i][j] = ' ';
 		}
 	}
@@ -45,14 +44,13 @@ static void	check_spaces(char **str)
 	int	i;
 
 	i = 0;
-
 	while ((*str)[i] != '\0')
 	{
 		if ((*str)[i] == '\'')
 		{
 			while ((*str)[++i] != '\'' && (*str)[i] != '\0')
 			{
-				if ((*str)[i] ==  ' ')
+				if ((*str)[i] == ' ')
 					(*str)[i] = 1;
 			}
 		}
@@ -60,7 +58,7 @@ static void	check_spaces(char **str)
 		{
 			while ((*str)[++i] != '\"' && (*str)[i] != '\0')
 			{
-				if (((*str)[i]) ==  1)
+				if (((*str)[i]) == 1)
 					(*str)[i] = 1;
 			}
 		}
@@ -111,7 +109,6 @@ char	**ft_split_pipex(char const *s, char c)
 	if (!scpy)
 		return (0);
 	check_spaces(&scpy);
-	// printf("3 %s\n", scpy);
 	if (ft_count_words(scpy, c) == 0)
 	{
 		split = malloc(1 * sizeof(char *));

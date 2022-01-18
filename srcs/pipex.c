@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
+/*   By: dalves-p <dalves-p@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/23 16:29:11 by dalves-p          #+#    #+#             */
-/*   Updated: 2022/01/18 21:42:55 by coder            ###   ########.fr       */
+/*   Updated: 2022/01/18 18:33:02 by dalves-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ char	**get_cmd(char *cmds)
 {
 	char	**cmd;
 	int		i;
-	
+
 	cmd = ft_split_pipex(cmds, ' ');
 	i = 0;
 	while (cmd[i])
@@ -38,25 +38,24 @@ char	*get_path(char *envp[], char *cmd)
 	int		i;
 
 	ptr_paths = get_full_path(envp);
-	i = 0;
-	while (ptr_paths[i])
+	i = -1;
+	while (ptr_paths[++i])
 	{
 		ptr_path = ft_strjoin(ptr_paths[i], SEPARATOR);
 		free(ptr_paths[i]);
 		selected_path = ft_strjoin(ptr_path, cmd);
-		free(ptr_path);		
+		free(ptr_path);
 		if (access(selected_path, F_OK) == 0)
 		{
-			while (ptr_paths[i+1] != NULL)
-			{
-				free(ptr_paths[i+1]);
-				i++;
-			}
+			// while (ptr_paths[i + 1] != NULL)
+			// {
+			// 	free(ptr_paths[i + 1]);
+			// 	i++;
+			// }
 			free(ptr_paths);
 			return (selected_path);
 		}
 		free(selected_path);
-		i++;
 	}
 	free(ptr_paths[i]);
 	free(ptr_paths);
@@ -139,7 +138,7 @@ int	main(int argc, char *argv[], char *envp[])
 	{
 		open(argv[argc - 1], O_WRONLY | O_CREAT | O_TRUNC, 0777);
 		error("Error: check your arguments\n\
-usage: ./pipex <infile> <cmd1> <cmd2> <outfile>", 0);		
+usage: ./pipex <infile> <cmd1> <cmd2> <outfile>", 0);
 	}
 	else
 		error("Error: check your arguments\n\
