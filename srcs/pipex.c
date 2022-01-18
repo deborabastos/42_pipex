@@ -6,7 +6,7 @@
 /*   By: dalves-p <dalves-p@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/23 16:29:11 by dalves-p          #+#    #+#             */
-/*   Updated: 2022/01/18 18:33:02 by dalves-p         ###   ########.fr       */
+/*   Updated: 2022/01/18 18:39:01 by dalves-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,9 @@ char	*get_path(char *envp[], char *cmd)
 		free(ptr_path);
 		if (access(selected_path, F_OK) == 0)
 		{
-			// while (ptr_paths[i + 1] != NULL)
-			// {
-			// 	free(ptr_paths[i + 1]);
-			// 	i++;
-			// }
+			// Se achar caminho, dar free nos ptr_paths[i] posteiores até NULL
+			while (ptr_paths[i++] != NULL)
+				free(ptr_paths[i]);
 			free(ptr_paths);
 			return (selected_path);
 		}
