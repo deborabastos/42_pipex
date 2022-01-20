@@ -1,4 +1,3 @@
-
 ./pipex "infile" "tr Débor '  . '" "tr a '@'" "outfile0"
 < "infile" tr Débora "  .  "| tr a '@' > "outfile2"
 
@@ -6,26 +5,6 @@
 ./pipex "infile" "tr b ' '" "tr a '@'" "outfile0"
 ./pipex "infile" "   tr b ' '   " "   tr a '#'  " "outfile00"
 
-#sempre achar espaço troca por 1
-
-./pipex "infile" "tr -d' '" "tr a '@'" "outfile0"
-< "infile" tr -d' '| tr b ' ' > "outfile2"
-
-< "infile" tr a b| tr b ' ' > "outfile2"
-
-
-
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-./pipex infile  outfile
-< infile > outfile2
-
-
-
-
-# VM não tem ping instalado
-# Não sei o que deve ter no infile para funcionar
-./pipex "infile" "ping 8.8.8.8" "grep ms" "outfile2"
-< "infile" ping 8.8.8.8 | grep ms > "outfile2"
 
 ./pipex infile2 "grep Now" "wc -w" outfile1
 ./pipex infile2 "grep Now" "head -2" outfile2
@@ -36,8 +15,11 @@
 ./pipex infilex "cat" "cat" outfile7
 ./pipex infile "catt" "cat" outfile8
 ./pipex infile "cat" "catt" outfile9
+./pipex infile "catt" "catt" outfile10
 ./pipex infile "cat" "cat"
 ./pipex infile "cat" outfile9
+./pipex infile outfile20
+
 
 
 
@@ -47,10 +29,6 @@ valgrind --leak-check=full --trace-children=yes -s ./pipex infile "cat" "cat" ou
 valgrind --leak-check=full --show-leak-kinds=all --trace-children=yes -s ./pipex infile "blah" "cat" outfile8
 valgrind --leak-check=full --show-leak-kinds=all --trace-children=yes -s ./pipex infile "cat" "blah" outfile9
 valgrind --leak-check=full --trace-children=yes -s ./pipex infile "cat" "cat"
-
-
-
-valgrind --leak-check=full --trace-children=yes -s ./pipex "infile" "tr Débor '  . '" "tr a '@'" "outfile0"
 
 
 

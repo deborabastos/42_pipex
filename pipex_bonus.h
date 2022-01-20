@@ -6,7 +6,7 @@
 /*   By: dalves-p <dalves-p@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/23 16:29:46 by dalves-p          #+#    #+#             */
-/*   Updated: 2022/01/18 18:24:03 by dalves-p         ###   ########.fr       */
+/*   Updated: 2022/01/20 16:22:30 by dalves-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@
 
 # define FD_R 		0
 # define FD_W 		1
-# define SPACEMAN 	'#$@'
 
 # if defined _WIN32
 #  define SEPARATOR	'\\'
@@ -46,10 +45,8 @@ typedef struct s_pipex
 */
 
 int		error(char *err, int code);
-char	**ft_split_pipex(char const *s, char c);
 char	**get_cmd(char *cmds);
 char	*get_path(char **ptr_paths, char *cmd);
-void	free_ptrptr(char **cmd);
 
 /*
 ** LIBFT
@@ -127,5 +124,6 @@ void	ft_putlnbr(long long int n);
 char	*ft_utoa_base(unsigned int n, char *base);
 char	*ft_strrev(char *str);
 void	ft_free_ptrptr(char **cmd);
+char	**ft_split_pipex(char const *s, char c);
 
 #endif
