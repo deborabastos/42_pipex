@@ -1,18 +1,32 @@
-./pipex infile "" "" outfile12		permission denied (2x). Gera outfile
-< infile "" | "" > outfile			permission denied (2x). Gera outfile
-
-./pipex infile "cat" "" outfile12		permission denied. Gera outfile
-< infile "cat" | "" > outfile			permission denied. Gera outfile
+./pipex infile "tr 'abacaxi' 'o'" "tr 'o' 'a'" "outfile"
+< infile tr 'abacaxi' 'o' | tr 'o' 'a' > outfile_shell
 
 
-./pipex infile "" "cat" outfile12	permission denied. Gera outfile
-< infile "" | cat > outfile			permission denied. Gera outfile
+!!!!!! Não consigo !!!!!!
+./pipex infile "cat" "exit 5" outfile
+< infile cat | exit 5 > outfile_shell
+
+
+./pipex infile "tr 'ab' '''" "tr ''' 'cd'" outfile
+< infile "tr 'ab' '''" | "tr ''' 'cd'" > outfile_shell
 
 
 ----------------------------------------------------------------
 
+./pipex infile "" "" outfile12		command not found (2x). Gera outfile
+< infile "" | "" > outfile_shell			command not found (2x). Gera outfile
+
+./pipex infile "cat" "" outfile12		command not found. Gera outfile
+< infile "cat" | "" > outfile_shell			command not found. Gera outfile
+
+
+./pipex infile "" "cat" outfile12	command not found. Gera outfile
+< infile "" | cat > outfile_shell			command not found. Gera outfile
+
+----------------------------------------------------------------
+
 ./pipex "infile" "tr Débor '  . '" "tr a '@'" "outfile0"
-< "infile" tr Débora "  .  "| tr a '@' > "outfile2"
+< "infile" tr Débor "  .  "| tr a '@' > "outfile_shell"
 
 
 ./pipex "infile" "tr b ' '" "tr a '@'" "outfile0"
