@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dalves-p <dalves-p@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/23 16:29:11 by dalves-p          #+#    #+#             */
-/*   Updated: 2022/01/20 17:31:45 by dalves-p         ###   ########.fr       */
+/*   Updated: 2022/01/21 21:14:31 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,6 +126,12 @@ int	main(int argc, char *argv[], char *envp[])
 				parent_process(envp, pipex, pipe_fd[i]);
 			}
 		}
+	}
+	else if (argc == 3)
+	{
+		open(argv[argc - 1], O_WRONLY | O_CREAT | O_TRUNC, 0777);
+		error("Error: check your arguments\n\
+usage: ./pipex <infile> <cmd1> <cmd2> <outfile>", 0);
 	}
 	else
 		error("Error: check your arguments\n\

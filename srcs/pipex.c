@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dalves-p <dalves-p@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/23 16:29:11 by dalves-p          #+#    #+#             */
-/*   Updated: 2022/01/21 10:38:28 by dalves-p         ###   ########.fr       */
+/*   Updated: 2022/01/21 21:16:55 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int	child_process(char *argv[], char *envp[], int fd[2])
 	close(fd[FD_R]);
 	infile_fd = open(argv[1], O_RDONLY, 0777);
 	if (infile_fd == -1)
-		error("no such file or directory", EXIT_FAILURE);
+		error("No such file or directory", EXIT_FAILURE);
 	dup2(fd[FD_W], STDOUT_FILENO);
 	dup2(infile_fd, STDIN_FILENO);
 	close(infile_fd);
