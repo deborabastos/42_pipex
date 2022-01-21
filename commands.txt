@@ -3,7 +3,7 @@
 
 
 !!!!!! Não consigo !!!!!!
-./pipex infile "cat" "exit 5" outfile
+./pipex infile "cat" "exit 5" outfile		não encontra o comando exit
 < infile cat | exit 5 > outfile_shell
 
 
