@@ -6,7 +6,7 @@
 /*   By: dalves-p <dalves-p@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/23 16:29:11 by dalves-p          #+#    #+#             */
-/*   Updated: 2022/01/20 21:16:56 by dalves-p         ###   ########.fr       */
+/*   Updated: 2022/01/21 10:38:28 by dalves-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	**get_cmd(char *cmds)
 
 	cmd = ft_split_pipex(cmds, ' ');
 	if (cmd[0] == NULL)
-		error("permission denied", 126);
+		error("command not found", 127);
 	i = 0;
 	while (cmd[i])
 	{
