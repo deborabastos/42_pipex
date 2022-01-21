@@ -6,7 +6,7 @@
 /*   By: dalves-p <dalves-p@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/23 16:29:11 by dalves-p          #+#    #+#             */
-/*   Updated: 2022/01/14 00:08:34 by dalves-p         ###   ########.fr       */
+/*   Updated: 2022/01/20 17:31:45 by dalves-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	child_process(char *envp[], t_pipex pipex, int fd[2])
 	int		infile_fd;
 	char	**cmd;
 	char	*path;
-	
+
 	close(fd[FD_R]);
 	infile_fd = open(pipex.infile, O_RDONLY, 0777);
 	if (infile_fd == -1)
@@ -30,9 +30,12 @@ int	child_process(char *envp[], t_pipex pipex, int fd[2])
 	path = get_path(pipex.paths, cmd[0]);
 	if (execve(path, cmd, envp) == -1)
 	{
+		if (path != cmd[0])
+			free(path);
 		ft_free_ptrptr(cmd);
 		error("command not found", 127);
-	}	return (0);
+	}
+	return (0);
 }
 
 int	parent_process(char *envp[], t_pipex pipex, int fd[2])
@@ -40,7 +43,6 @@ int	parent_process(char *envp[], t_pipex pipex, int fd[2])
 	int		outfile_fd;
 	char	**cmd;
 	char	*path;
-	int		err;
 
 	close(fd[FD_W]);
 	outfile_fd = open(pipex.outfile, O_WRONLY | O_CREAT | O_TRUNC, 0777);
@@ -52,9 +54,10 @@ int	parent_process(char *envp[], t_pipex pipex, int fd[2])
 	close(fd[FD_R]);
 	cmd = get_cmd(pipex.cmds[1]);
 	path = get_path(pipex.paths, cmd[0]);
-	err = execve(path, cmd, envp);
-	if (err == -1)
+	if (execve(path, cmd, envp) == -1)
 	{
+		if (path != cmd[0])
+			free(path);
 		ft_free_ptrptr(cmd);
 		error("command not found", 127);
 	}

@@ -1,3 +1,16 @@
+./pipex infile "" "" outfile12		segmentation fault  ./pipex infile "" "" outfile12
+< infile "" | "" > outfile			permission denied (2x). Gera outfile
+
+./pipex infile "cat" "" outfile12		segmentation fault  ./pipex infile "cat" "" outfile12
+< infile "cat" | "" > outfile			permission denied. Gera outfile
+
+
+./pipex infile "" "cat" outfile12	sem erro. Gera outfile
+< infile "" | cat > outfile			permission denied. Gera outfile
+
+
+----------------------------------------------------------------
+
 ./pipex "infile" "tr Débor '  . '" "tr a '@'" "outfile0"
 < "infile" tr Débora "  .  "| tr a '@' > "outfile2"
 
