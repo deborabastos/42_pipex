@@ -3,15 +3,15 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: dalves-p <dalves-p@student.42sp.org.br>    +#+  +:+       +#+         #
+#    By: coder <coder@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/23 16:30:23 by dalves-p          #+#    #+#              #
-#    Updated: 2022/01/20 16:58:12 by dalves-p         ###   ########.fr        #
+#    Updated: 2022/01/27 01:11:04 by coder            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		=	pipex
-CC			=	cc
+CC			=	gcc
 SRCS		=	srcs/pipex.c \
 				srcs/pipex_utils.c \
 
