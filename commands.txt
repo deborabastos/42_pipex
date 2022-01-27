@@ -61,6 +61,6 @@ valgrind --leak-check=full --trace-children=yes -s ./pipex infile "cat" "cat"
 
 
 
-BONUS
-Não está funcionando
- ./pipex infile "cat" "wc -l" outfile 
+BONUS TESTES:
+ ./pipex infile "cat" "cat" outfile 
+ ./pipex infile "cat" "cat" cat cat outfile 
