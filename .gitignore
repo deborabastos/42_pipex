@@ -1,9 +1,13 @@
 ## Other
 .DS_STORE
-PIPEXaminator
-pipex-tester
+PIPEXaminator/
+PIPEXaminator/*
+pipex-tester/
+pipex-tester/*
+
 
 ## Editor
+.vscode/
 .vscode/*
 *~
 \#*\#
