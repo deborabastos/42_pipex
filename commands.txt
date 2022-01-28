@@ -69,3 +69,5 @@ BONUS TESTES:
 
  ./pipex infile "tr 'abacaxi' 'o'" "tr 'o' 'a'" "tr a i" "outfile"
  ./pipex infile "tr 'abacaxi' 'o'" "tr 'o' 'a'" "tr a i" "tr i %" "outfile"
+
+BONUS: trabalhar com muitos vazios... erro ou passa para próximo?

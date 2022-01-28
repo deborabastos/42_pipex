@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dalves-p <dalves-p@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/23 16:29:11 by dalves-p          #+#    #+#             */
-/*   Updated: 2022/01/27 21:06:14 by dalves-p         ###   ########.fr       */
+/*   Updated: 2022/01/28 01:33:33 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ int	child_process(char *envp[], t_pipex pipex, int pipe_fd[][2], int i)
 		// escreve no pipe[0]
 	if (i == 0)
 	{
-		printf("Proceso: %d\n", i);
-		printf("Comando: %s\n", pipex.cmds[i]);
+		//printf("Proceso: %d\n", i);
+		//printf("Comando: %s\n", pipex.cmds[i]);
 		
 		infile_fd = open(pipex.infile, O_RDONLY, 0777);
 		if (infile_fd == -1)
@@ -55,8 +55,8 @@ int	child_process(char *envp[], t_pipex pipex, int pipe_fd[][2], int i)
 		// escreve no pipe[n+1]
 	else if (pipex.count_cmds > 2 && i > 0 && i < pipex.count_cmds - 1)
 	{
-		printf("Proceso: %d\n", i);
-		printf("Comando: %s\n", pipex.cmds[i]);
+		//printf("Proceso: %d\n", i);
+		//printf("Comando: %s\n", pipex.cmds[i]);
 		dup2(pipe_fd[i][FD_R], STDIN_FILENO);
 		dup2(pipe_fd[i + 1][FD_W], STDOUT_FILENO);	
 		close(pipe_fd[i][FD_R]);
@@ -89,8 +89,8 @@ int	last_process(char *envp[], t_pipex pipex, int pipe_fd[][2])
 	char	*path;
 	int		j;
 
-	printf("Último Proceso: %d\n", pipex.count_cmds - 1);
-	printf("Último Comando: %s\n", pipex.cmds[pipex.count_cmds - 1]);
+	//printf("Último Proceso: %d\n", pipex.count_cmds - 1);
+	//printf("Último Comando: %s\n", pipex.cmds[pipex.count_cmds - 1]);
 	j = 0;
 	while (j < pipex.count_cmds)
 	{
@@ -168,7 +168,7 @@ int run_pipex(t_pipex pipex, char *envp[])
 		if (pipe(pipe_fd[i]) == -1)
 			error("Error while calling pipe", EXIT_FAILURE);
 	}
-	printf("Número de processos: %d\n", pipex.count_cmds);
+	//printf("Número de processos: %d\n", pipex.count_cmds);
 	// Criar n processos
 	i = -1;
 	while (++i < pipex.count_cmds - 1)

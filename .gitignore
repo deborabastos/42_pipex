@@ -4,7 +4,10 @@ PIPEXaminator/
 PIPEXaminator/*
 pipex-tester/
 pipex-tester/*
-
+PipexTester/
+PipexTester/*
+pipex-tester-d/
+pipex-tester-d/
 
 ## Editor
 .vscode/
