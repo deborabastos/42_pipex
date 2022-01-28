@@ -71,3 +71,13 @@ BONUS TESTES:
  ./pipex infile "tr 'abacaxi' 'o'" "tr 'o' 'a'" "tr a i" "tr i %" "outfile"
 
 BONUS: trabalhar com muitos vazios... erro ou passa para próximo?
+
+
+
+./pipex infile "cat" "grep 'abacaxi'" "tr ' a' 'x '" "grep 'x'" "tr ' ' 'l'" "grep 'l'" "wc -l" outfile
+< infile cat | grep 'abacaxi' | tr ' a' 'x ' | grep 'x' | tr ' ' 'l' | grep 'l' | wc -l > outfile_shell
+
+
+./pipex infile "cat" "grep 'abacaxi'" "" "grep 'x'" "tr ' ' 'l'" "" outfile
+< infile cat | grep 'abacaxi' | "" | grep 'x' | tr ' ' 'l' | "" > outfile_shell
+

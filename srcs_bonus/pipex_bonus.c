@@ -6,7 +6,7 @@
 /*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/23 16:29:11 by dalves-p          #+#    #+#             */
-/*   Updated: 2022/01/28 01:33:33 by coder            ###   ########.fr       */
+/*   Updated: 2022/01/28 22:26:10 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -201,7 +201,7 @@ int	main(int argc, char *argv[], char *envp[])
 	{
 		open(argv[argc - 1], O_WRONLY | O_CREAT | O_TRUNC, 0777);
 		error("Error: check your arguments\n\
-usage: ./pipex <infile> <cmd1> <cmd2> <outfile>", 0);
+usage: ./pipex <infile> <cmd1> ... <cmd2> <outfile>", 0);
 	}
 	else
 		error("Error: check your arguments\n\
