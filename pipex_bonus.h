@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dalves-p <dalves-p@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/23 16:29:46 by dalves-p          #+#    #+#             */
-/*   Updated: 2022/01/20 16:58:44 by dalves-p         ###   ########.fr       */
+/*   Updated: 2022/01/29 23:07:30 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ typedef struct s_pipex
 	char	*infile;
 	char	*outfile;
 	char	**paths;
+	int		here_doc;
+	char	*limiter;
 }	t_pipex;
 
 /*
@@ -47,6 +49,9 @@ typedef struct s_pipex
 int		error(char *err, int code);
 char	**get_cmd(char *cmds);
 char	*get_path(char **ptr_paths, char *cmd);
+void	init(int argc, char *argv[], char *envp[], t_pipex *pipex);
+void	init_here_doc(int argc, char *argv[], char *envp[], t_pipex *pipex);
+
 
 /*
 ** LIBFT

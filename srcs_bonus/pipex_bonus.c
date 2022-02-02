@@ -6,7 +6,7 @@
 /*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/23 16:29:11 by dalves-p          #+#    #+#             */
-/*   Updated: 2022/01/28 22:26:10 by coder            ###   ########.fr       */
+/*   Updated: 2022/01/29 23:19:10 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	child_process(char *envp[], t_pipex pipex, int pipe_fd[][2], int i)
 	j = 0;
 	// vou usar pipe de leitura de i, de escrita de i + 1
 	// fechar todos os pipes de leitura diferente de i
-	// e todos os pipes de escrita diferente de i +1
+	// e todos os pipes de escrita diferente de i + 1
 	while (j < pipex.count_cmds + 1)
 	{
 		// fecho todos de leitura, menos o i = j
@@ -53,14 +53,14 @@ int	child_process(char *envp[], t_pipex pipex, int pipe_fd[][2], int i)
 	// processos do meio  (n):
 		// lê do pipe[n]
 		// escreve no pipe[n+1]
-	else if (pipex.count_cmds > 2 && i > 0 && i < pipex.count_cmds - 1)
+	else if (i > 0 && i < pipex.count_cmds - 1 && pipex.count_cmds > 2)
 	{
 		//printf("Proceso: %d\n", i);
 		//printf("Comando: %s\n", pipex.cmds[i]);
 		dup2(pipe_fd[i][FD_R], STDIN_FILENO);
 		dup2(pipe_fd[i + 1][FD_W], STDOUT_FILENO);	
 		close(pipe_fd[i][FD_R]);
-		close(pipe_fd[i + 1][FD_W]);			
+		close(pipe_fd[i + 1][FD_W]);
 	}
 	// último processo:
 		// lê do pipe[n]
@@ -80,7 +80,6 @@ int	child_process(char *envp[], t_pipex pipex, int pipe_fd[][2], int i)
 	}
 	return (0);
 }
-
 
 int	last_process(char *envp[], t_pipex pipex, int pipe_fd[][2])
 {
@@ -119,39 +118,6 @@ int	last_process(char *envp[], t_pipex pipex, int pipe_fd[][2])
 	return (0);
 }
 
-
-
-void	init(int argc, char *argv[], char *envp[], t_pipex *pipex)
-{
-	int		i;
-	char	*env_paths;
-	char	*full_path;
-
-	pipex->argc = argc;
-	pipex->count_cmds = argc - 3;
-	pipex->infile = argv[1];
-	pipex->outfile = argv[argc - 1];
-	pipex->cmds = malloc(pipex->count_cmds * sizeof(char *));
-	i = 0;
-	while (i < pipex->count_cmds)
-	{
-		pipex->cmds[i] = malloc(ft_strlen(argv[i + 2]) * sizeof(char));
-		pipex->cmds[i] = argv[i + 2];
-		i++;
-	}
-	i = 0;
-	while (envp[i])
-	{
-		if (ft_strstr(envp[i], "PATH") != 0)
-			env_paths = envp[i];
-		i++;
-	}
-	full_path = ft_strtrim(env_paths, "PATH=");
-	pipex->paths = ft_split_pipex(full_path, ':');
-	free(full_path);
-}
-
-
 int run_pipex(t_pipex pipex, char *envp[])
 {
 	// precisamos de n (argc - 3) processos = pipex.count_cmds
@@ -188,13 +154,14 @@ int run_pipex(t_pipex pipex, char *envp[])
 	return (0);
 }
 
-
-
 int	main(int argc, char *argv[], char *envp[])
 {
 	t_pipex	pipex;
 
-	init(argc, argv, envp, &pipex);
+	if (argv[1] == "here_doc")
+		init_here_doc(argc, argv, envp, &pipex);
+	else
+		init(argc, argv, envp, &pipex);
 	if (argc >= 5)
 		run_pipex(pipex, envp);
 	else if (argc == 3)

@@ -6,7 +6,7 @@
 #    By: coder <coder@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/23 16:30:23 by dalves-p          #+#    #+#              #
-#    Updated: 2022/01/27 01:11:04 by coder            ###   ########.fr        #
+#    Updated: 2022/01/29 23:06:56 by coder            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,6 +17,7 @@ SRCS		=	srcs/pipex.c \
 
 SRCS_BONUS		=	srcs_bonus/pipex_bonus.c \
 					srcs_bonus/pipex_utils_bonus.c \
+					srcs_bonus/pipex_init_utils_bonus.c \
 
 SRCS_LIB	=	libft/ft_strstr.c \
 				libft/ft_strlen.c \
