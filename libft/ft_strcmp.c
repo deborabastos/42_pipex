@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dalves-p <dalves-p@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 19:35:48 by dalves-p          #+#    #+#             */
-/*   Updated: 2021/07/01 22:13:03 by dalves-p         ###   ########.fr       */
+/*   Updated: 2022/02/07 20:23:17 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,7 @@
 /*
 ** LIBRARY: <strings.h>
 ** DESCRIPTION:
-**		The strncmp() compares bytes of s1 and s2.
-**		It returns an integer less than, equal to, or greater than zero if s1 
-**	(or the first n bytes thereof) is found, respectively, to be less than, to 
-**	match, or be greater than s2.
+**		The strcmp() compares bytes of s1 and s2.
 */
 
 int	ft_strcmp(char *s1, char *s2)

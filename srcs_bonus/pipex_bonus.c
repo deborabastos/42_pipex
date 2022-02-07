@@ -6,7 +6,7 @@
 /*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/23 16:29:11 by dalves-p          #+#    #+#             */
-/*   Updated: 2022/02/03 01:13:47 by coder            ###   ########.fr       */
+/*   Updated: 2022/02/07 20:30:48 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,7 +158,7 @@ int	main(int argc, char *argv[], char *envp[])
 {
 	t_pipex	pipex;
 
-	if (ft_strcmp(argv[1], "here_doc"))
+	if ((ft_strcmp(argv[1], "here_doc")) == 0)
 		init_here_doc(argc, argv, envp, &pipex);
 	else
 		init(argc, argv, envp, &pipex);
