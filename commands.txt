@@ -85,3 +85,14 @@ BONUS: trabalhar com muitos vazios... erro ou passa para próximo?
 ./pipex infile "cat" "grep 'abacaxi'" "" "grep 'x'" "tr ' ' 'l'" "" outfile
 < infile cat | grep 'abacaxi' | "" | grep 'x' | tr ' ' 'l' | "" > outfile_shell
 
+
+
+ ./pipex here_doc "cat" "cat" outfile 
+
+!!!!!!!!!!!!!!!!
+BONUS AINDA NÃO TRATA here_doc com apenas um comando!!!
+ ./pipex here_doc LIMITER cat outfile 
+
+
+Mas pega dois comandos!!!!
+ ./pipex here_doc LIMITER cat cat outfile 
