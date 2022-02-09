@@ -6,7 +6,7 @@
 #    By: dalves-p <dalves-p@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/23 16:30:23 by dalves-p          #+#    #+#              #
-#    Updated: 2022/02/07 20:11:31 by dalves-p         ###   ########.fr        #
+#    Updated: 2022/02/09 17:32:43 by dalves-p         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,8 @@ SRCS		=	srcs/pipex.c \
 SRCS_BONUS		=	srcs_bonus/pipex_bonus.c \
 					srcs_bonus/pipex_utils_bonus.c \
 					srcs_bonus/pipex_init_utils_bonus.c \
-
+					srcs_bonus/pipex_here_doc_bonus.c \
+					
 SRCS_LIB	=	libft/ft_strstr.c \
 				libft/ft_strlen.c \
 				libft/ft_strchr.c \

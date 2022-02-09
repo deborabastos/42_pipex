@@ -6,7 +6,7 @@
 /*   By: dalves-p <dalves-p@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/23 16:29:11 by dalves-p          #+#    #+#             */
-/*   Updated: 2022/02/09 17:04:39 by dalves-p         ###   ########.fr       */
+/*   Updated: 2022/02/09 18:03:51 by dalves-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,36 +15,16 @@
 int	first_process(t_pipex pipex, int pipe_fd[][2], int i)
 {
 	int		infile_fd;
-	int		tmp_fd[2];
-	char	*line;
 
 	if (pipex.here_doc == 1)
-	{
-		if (pipe(tmp_fd) == -1)
-			error("Error while calling pipe", EXIT_FAILURE);
-		write(STDOUT_FILENO, "pipex heredoc> ", 15);
-		ft_gnl(STDIN_FILENO, &line);
-		while (line && (ft_strcmp(line, pipex.limiter) != 0))
-		{
-			write(tmp_fd[FD_W], line, ft_strlen(line));
-			write(tmp_fd[FD_W], "\n", 1);
-			free(line);
-			write(STDOUT_FILENO, "pipex heredoc> ", 15);
-			ft_gnl(STDIN_FILENO, &line);
-		}
-		if (line != NULL)
-			free(line);
-		dup2(tmp_fd[FD_R], STDIN_FILENO);
-		close(tmp_fd[FD_R]);
-		close(tmp_fd[FD_W]);
-	}
+		run_here_doc(pipex);
 	else
 	{
 		infile_fd = open(pipex.infile, O_RDONLY, 0777);
 		if (infile_fd == -1)
 			error("No such file or directory", EXIT_FAILURE);
 		dup2(infile_fd, STDIN_FILENO);
-		close(infile_fd);		
+		close(infile_fd);
 	}
 	dup2(pipe_fd[i + 1][FD_W], STDOUT_FILENO);
 	close(pipe_fd[i][FD_W]);
@@ -55,40 +35,14 @@ int	child_process(char *envp[], t_pipex pipex, int pipe_fd[][2], int i)
 {
 	char	**cmd;
 	char	*path;
-	int		j;
 
-	j = -1;
-	// vou usar pipe de leitura de i e pipe de escrita de i + 1
-	// então: fechar todos os pipes de leitura diferente de i
-	// e todos os pipes de escrita diferente de i + 1
-	while (++j < pipex.count_cmds + 1)
-	{
-		// fecho todos de leitura, menos o i = j
-		if (i != j)
-			close(pipe_fd[j][FD_R]);
-		// fecho todos de escrite, menos o i + 1 = j
-		if (i + 1 != j)
-			close(pipe_fd[j][FD_W]);
-	}
-
-	// primeiro processo:
-		// lê do infile
-		// escreve no pipe[0]
+	close_pipes(pipex, pipe_fd, i);
 	if (i == 0)
-	{
-		// printf("Proceso: %d\n", i);
-		// printf("Comando: %s\n", pipex.cmds[i]);
-		first_process(pipex, pipe_fd, i);	
-	}
-	// processos do meio  (n):
-		// lê do pipe[n]
-		// escreve no pipe[n+1]
+		first_process(pipex, pipe_fd, i);
 	else if (i > 0 && i < pipex.count_cmds - 1 && pipex.count_cmds > 2)
 	{
-		// printf("Proceso: %d\n", i);
-		// printf("Comando: %s\n", pipex.cmds[i]);
 		dup2(pipe_fd[i][FD_R], STDIN_FILENO);
-		dup2(pipe_fd[i + 1][FD_W], STDOUT_FILENO);	
+		dup2(pipe_fd[i + 1][FD_W], STDOUT_FILENO);
 		close(pipe_fd[i][FD_R]);
 		close(pipe_fd[i + 1][FD_W]);
 	}
@@ -109,19 +63,8 @@ int	last_process(char *envp[], t_pipex pipex, int pipe_fd[][2])
 	int		outfile_fd;
 	char	**cmd;
 	char	*path;
-	int		j;
 
-	// printf("Último Proceso: %d\n", pipex.count_cmds - 1);
-	// printf("Último Comando: %s\n", pipex.cmds[pipex.count_cmds - 1]);
-	j = 0;
-	while (j < pipex.count_cmds)
-	{
-		if (pipex.count_cmds - 1 != j)
-			close(pipe_fd[j][FD_R]);
-		if (pipex.count_cmds != j)
-			close(pipe_fd[j][FD_W]);
-		j++;
-	}
+	close_pipes(pipex, pipe_fd, pipex.count_cmds - 1);
 	if (pipex.here_doc == 0)
 		outfile_fd = open(pipex.outfile, O_WRONLY | O_CREAT | O_TRUNC, 0777);
 	else
@@ -144,24 +87,18 @@ int	last_process(char *envp[], t_pipex pipex, int pipe_fd[][2])
 	return (0);
 }
 
-int run_pipex(t_pipex pipex, char *envp[])
+int	run_pipex(t_pipex pipex, char *envp[])
 {
-	// precisamos de n (argc - 3) processos = pipex.count_cmds
-	// precisamos de n + 1 (argc - 2) pipes		
-
-	int		pipe_fd[pipex.count_cmds + 1][2];
-	int		pid[pipex.count_cmds];
+	int		pipe_fd[OPEN_MAX][2];
+	int		pid[OPEN_MAX];
 	int		i;
 
-	// Abrir n + 1 pipes
 	i = -1;
 	while (++i < pipex.count_cmds + 1)
 	{
 		if (pipe(pipe_fd[i]) == -1)
 			error("Error while calling pipe", EXIT_FAILURE);
 	}
-	//printf("Número de processos: %d\n", pipex.count_cmds);
-	// Criar n - 1 processos
 	i = -1;
 	while (++i < pipex.count_cmds - 1)
 	{
@@ -171,12 +108,10 @@ int run_pipex(t_pipex pipex, char *envp[])
 		if (pid[i] == 0)
 			child_process(envp, pipex, pipe_fd, i);
 	}
-	// último processo
 	if (++i == pipex.count_cmds)
 	{
-		//Main process ????????
 		waitpid(-1, NULL, WNOHANG);
-		last_process(envp, pipex, pipe_fd);		
+		last_process(envp, pipex, pipe_fd);
 	}
 	return (0);
 }
@@ -189,7 +124,8 @@ int	main(int argc, char *argv[], char *envp[])
 		init_here_doc(argc, argv, envp, &pipex);
 	else
 		init(argc, argv, envp, &pipex);
-	if ((argc >= 5 && pipex.here_doc == 0) || (argc >= 6 && pipex.here_doc == 1))
+	if ((argc >= 5 && pipex.here_doc == 0)
+		|| (argc >= 6 && pipex.here_doc == 1))
 		run_pipex(pipex, envp);
 	else if (argc == 3)
 	{

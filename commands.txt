@@ -3,15 +3,9 @@
 
 ./pipex infile "cat /etc/passwd" "awk -F : '{print \$1}'" outfile
 
-
-!!!!!! Não consigo !!!!!!
-./pipex infile "cat" "exit 5" outfile		não encontra o comando exit
-< infile cat | exit 5 > outfile_shell
-
 !!!!!! Não consigo !!!!!!
 ./pipex infile "tr 'ab' '\''" "tr '\'' 'cd'" outfile
 < infile "tr 'ab' '''" | "tr ''' 'cd'" > outfile_shell
-
 
 ----------------------------------------------------------------
 
@@ -70,6 +64,8 @@ BONUS TESTES:
  ./pipex infile "tr 'abacaxi' 'o '" "tr 'o' 'a'" "tr a i" "tr ' ' &" "outfile"
  ./pipex infile "tr 'abacaxi' 'o'" "tr 'o' 'a'" "tr a i" "tr i %" "outfile"
 
+
+
 BONUS: trabalhar com muitos vazios... erro ou passa para próximo?
 
 
@@ -86,11 +82,6 @@ BONUS: trabalhar com muitos vazios... erro ou passa para próximo?
 < infile cat | grep 'abacaxi' | "" | grep 'x' | tr ' ' 'l' | "" > outfile_shell
 
 
-
-
-ERROR
- ./pipex here_doc "cat" "cat" outfile 
-
 !!!!!!!!!!!!!!!!
 BONUS AINDA NÃO TRATA here_doc com apenas um comando!!!
  ./pipex here_doc LIMITER cat outfile 
@@ -98,6 +89,9 @@ BONUS AINDA NÃO TRATA here_doc com apenas um comando!!!
 
 Mas pega dois comandos!!!!
  ./pipex here_doc LIMITER cat cat outfile 
+
+
+ ./pipex here_doc LIMITER "cat" "grep 'abacaxi'" "tr ' a' 'x '" "grep 'x'" "tr ' ' 'l'" "grep 'l'" outfile2
 
 
 

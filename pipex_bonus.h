@@ -6,7 +6,7 @@
 /*   By: dalves-p <dalves-p@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/23 16:29:46 by dalves-p          #+#    #+#             */
-/*   Updated: 2022/02/07 20:17:24 by dalves-p         ###   ########.fr       */
+/*   Updated: 2022/02/09 18:03:25 by dalves-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@
 #  define SEPARATOR	"/"
 # endif
 
-# define OPEN_MAX		255
+# define OPEN_MAX		1024
 
 typedef struct s_pipex
 {
@@ -53,7 +53,8 @@ char	**get_cmd(char *cmds);
 char	*get_path(char **ptr_paths, char *cmd);
 void	init(int argc, char *argv[], char *envp[], t_pipex *pipex);
 void	init_here_doc(int argc, char *argv[], char *envp[], t_pipex *pipex);
-
+int		run_here_doc(t_pipex pipex);
+void	close_pipes(t_pipex pipex, int pipe_fd[][2], int i);
 
 /*
 ** LIBFT

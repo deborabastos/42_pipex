@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_utils_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
+/*   By: dalves-p <dalves-p@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 12:55:01 by dalves-p          #+#    #+#             */
-/*   Updated: 2022/01/28 01:41:56 by coder            ###   ########.fr       */
+/*   Updated: 2022/02/09 17:49:52 by dalves-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ char	**get_cmd(char *cmds)
 
 	cmd = ft_split_pipex(cmds, ' ');
 	if (cmd[0] == NULL)
-		error("command not found", 127);	
+		error("command not found", 127);
 	i = 0;
 	while (cmd[i])
 	{
@@ -57,11 +57,25 @@ char	*get_path(char **ptr_paths, char *cmd)
 			while (ptr_paths[i++] != NULL)
 				free(ptr_paths[i]);
 			free(ptr_paths);
-			return (selected_path);			
+			return (selected_path);
 		}
 		free(selected_path);
 	}
 	free(ptr_paths[i]);
 	free(ptr_paths);
 	return (cmd);
+}
+
+void	close_pipes(t_pipex pipex, int pipe_fd[][2], int i)
+{
+	int	j;
+
+	j = -1;
+	while (++j < pipex.count_cmds + 1)
+	{
+		if (i != j)
+			close(pipe_fd[j][FD_R]);
+		if (i + 1 != j)
+			close(pipe_fd[j][FD_W]);
+	}
 }
