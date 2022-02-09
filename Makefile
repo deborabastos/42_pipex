@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: coder <coder@student.42.fr>                +#+  +:+       +#+         #
+#    By: dalves-p <dalves-p@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/23 16:30:23 by dalves-p          #+#    #+#              #
-#    Updated: 2022/01/29 23:06:56 by coder            ###   ########.fr        #
+#    Updated: 2022/02/07 20:11:31 by dalves-p         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,6 +34,7 @@ SRCS_LIB	=	libft/ft_strstr.c \
 				libft/ft_putstr_fd.c \
 				libft/ft_strcmp.c \
 				libft/ft_free_ptrptr.c \
+				libft/ft_gnl.c \
 
 CFLAGS		=	-Wall -Wextra -Werror -g3
 RM			=	rm -f

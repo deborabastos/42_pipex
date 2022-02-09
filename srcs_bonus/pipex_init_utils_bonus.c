@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_init_utils_bonus.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
+/*   By: dalves-p <dalves-p@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/29 23:06:24 by coder             #+#    #+#             */
-/*   Updated: 2022/02/07 20:32:15 by coder            ###   ########.fr       */
+/*   Updated: 2022/02/09 13:30:09 by dalves-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void	init_here_doc(int argc, char *argv[], char *envp[], t_pipex *pipex)
 	pipex->infile = 0;
 	pipex->outfile = argv[argc - 1];
 	pipex->here_doc = 1;
-	pipex->limiter = argv[1];
+	pipex->limiter = argv[2];
 	pipex->cmds = malloc(pipex->count_cmds * sizeof(char *));
 	i = 0;
 	while (i < pipex->count_cmds)

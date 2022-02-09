@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
+/*   By: dalves-p <dalves-p@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 17:13:34 by dalves-p          #+#    #+#             */
-/*   Updated: 2022/02/02 23:08:12 by coder            ###   ########.fr       */
+/*   Updated: 2022/02/07 20:11:01 by dalves-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,12 @@
 # include <stdlib.h>
 # include <stdio.h>
 
+# define BUFFER_SIZE	1024
+# define OPEN_MAX		255
+
 size_t	ft_count_words(char const *s, char c);
 void	ft_free_ptrptr(char **cmd);
+int		ft_gnl(int fd, char **line);
 void	ft_putstr_fd(char *s, int fd);
 char	**ft_split_pipex(char const *s, char c);
 char	**ft_split(char const *s, char c);

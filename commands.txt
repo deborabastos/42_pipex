@@ -87,6 +87,8 @@ BONUS: trabalhar com muitos vazios... erro ou passa para próximo?
 
 
 
+
+ERROR
  ./pipex here_doc "cat" "cat" outfile 
 
 !!!!!!!!!!!!!!!!
@@ -96,3 +98,8 @@ BONUS AINDA NÃO TRATA here_doc com apenas um comando!!!
 
 Mas pega dois comandos!!!!
  ./pipex here_doc LIMITER cat cat outfile 
+
+
+
+Somente sai se linha == LIMITER
+cat << LIMITER | cat >> outfile_sheel

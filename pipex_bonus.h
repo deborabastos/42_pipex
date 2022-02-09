@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
+/*   By: dalves-p <dalves-p@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/23 16:29:46 by dalves-p          #+#    #+#             */
-/*   Updated: 2022/01/29 23:07:30 by coder            ###   ########.fr       */
+/*   Updated: 2022/02/07 20:17:24 by dalves-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@
 # else
 #  define SEPARATOR	"/"
 # endif
+
+# define OPEN_MAX		255
 
 typedef struct s_pipex
 {
@@ -72,5 +74,6 @@ size_t	ft_strlen(const char *s);
 char	*ft_strstr(char *haystack, char *needle);
 char	*ft_strtrim(char const *s1, char const *set);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
+int		ft_gnl(int fd, char **line);
 
 #endif

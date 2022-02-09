@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
+/*   By: dalves-p <dalves-p@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/23 16:29:11 by dalves-p          #+#    #+#             */
-/*   Updated: 2022/02/08 00:07:02 by coder            ###   ########.fr       */
+/*   Updated: 2022/02/09 17:04:39 by dalves-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,28 @@
 int	first_process(t_pipex pipex, int pipe_fd[][2], int i)
 {
 	int		infile_fd;
-	char	*buffer;
+	int		tmp_fd[2];
+	char	*line;
 
 	if (pipex.here_doc == 1)
 	{
-		write(1, "here_doc> ", 10);
-		buffer = get_next_line(STDIN_FILENO);
+		if (pipe(tmp_fd) == -1)
+			error("Error while calling pipe", EXIT_FAILURE);
+		write(STDOUT_FILENO, "pipex heredoc> ", 15);
+		ft_gnl(STDIN_FILENO, &line);
+		while (line && (ft_strcmp(line, pipex.limiter) != 0))
+		{
+			write(tmp_fd[FD_W], line, ft_strlen(line));
+			write(tmp_fd[FD_W], "\n", 1);
+			free(line);
+			write(STDOUT_FILENO, "pipex heredoc> ", 15);
+			ft_gnl(STDIN_FILENO, &line);
+		}
+		if (line != NULL)
+			free(line);
+		dup2(tmp_fd[FD_R], STDIN_FILENO);
+		close(tmp_fd[FD_R]);
+		close(tmp_fd[FD_W]);
 	}
 	else
 	{
@@ -144,7 +160,7 @@ int run_pipex(t_pipex pipex, char *envp[])
 		if (pipe(pipe_fd[i]) == -1)
 			error("Error while calling pipe", EXIT_FAILURE);
 	}
-	printf("Número de processos: %d\n", pipex.count_cmds);
+	//printf("Número de processos: %d\n", pipex.count_cmds);
 	// Criar n - 1 processos
 	i = -1;
 	while (++i < pipex.count_cmds - 1)
