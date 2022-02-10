@@ -59,8 +59,6 @@ BONUS TESTES:
  ./pipex infile "cat" "cat" outfile 
  ./pipex infile "cat" "cat" cat cat outfile 
 
-
-
  ./pipex infile "tr 'abacaxi' 'o '" "tr 'o' 'a'" "tr a i" "tr ' ' &" "outfile"
  ./pipex infile "tr 'abacaxi' 'o'" "tr 'o' 'a'" "tr a i" "tr i %" "outfile"
 
@@ -97,3 +95,6 @@ Mas pega dois comandos!!!!
 
 Somente sai se linha == LIMITER
 cat << LIMITER | cat >> outfile_sheel
+
+valgrind --leak-check=full --trace-children=yes -s  ./pipex here_doc LIMITER cat cat outfile 
+

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_init_utils_bonus.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dalves-p <dalves-p@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/29 23:06:24 by coder             #+#    #+#             */
-/*   Updated: 2022/02/09 18:10:57 by dalves-p         ###   ########.fr       */
+/*   Updated: 2022/02/10 00:58:22 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static void	split_cmd(char *argv[], t_pipex *pipex, int n)
 		pipex->cmds[i] = malloc(ft_strlen(argv[i + n]) * sizeof(char));
 		pipex->cmds[i] = argv[i + n];
 		i++;
-	}	
+	}
 }
 
 void	init(int argc, char *argv[], char *envp[], t_pipex *pipex)
