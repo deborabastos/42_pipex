@@ -1,50 +1,72 @@
+./pipex infile2 "grep Now" "wc -w" outfile
+< infile2 grep Now | wc -w > outfile_shell
+diff outfile outfile_shell 
+
+./pipex infile2 "grep Now" "head -2" outfile
+< infile2 grep Now | head -2 > outfile_shell
+diff outfile outfile_shell 
+
+./pipex infile2 "wc -w" "cat" outfile
+< infile2 wc -w| cat > outfile_shell
+diff outfile outfile_shell 
+
+./pipex infile "cat -n" "grep Talita" outfile
+< infile cat -n | grep Talita > outfile_shell
+diff outfile outfile_shell 
+
+./pipex infile "cat" "wc -l" outfile
+< infile cat | wc -l > outfile_shell
+diff outfile outfile_shell 
+
+./pipex infile "cat" "cat" outfile
+< infile cat | cat > outfile_shell
+diff outfile outfile_shell 
+
 ./pipex infile "tr 'abacaxi' 'o'" "tr 'o' 'a'" "outfile"
 < infile tr 'abacaxi' 'o' | tr 'o' 'a' > outfile_shell
+diff outfile outfile_shell 
 
 ./pipex infile "cat /etc/passwd" "awk -F : '{print \$1}'" outfile
+< infile cat /etc/passwd | awk -F : '{print $1}' > outfile_shell
+diff outfile outfile_shell 
 
-!!!!!! Não consigo !!!!!!
-./pipex infile "tr 'ab' '\''" "tr '\'' 'cd'" outfile
-< infile "tr 'ab' '''" | "tr ''' 'cd'" > outfile_shell
-
-----------------------------------------------------------------
-
-./pipex infile "" "" outfile12		command not found (2x). Gera outfile
-< infile "" | "" > outfile_shell			command not found (2x). Gera outfile
-
-./pipex infile "cat" "" outfile12		command not found. Gera outfile
-< infile "cat" | "" > outfile_shell			command not found. Gera outfile
-
-
-./pipex infile "" "cat" outfile12	command not found. Gera outfile
-< infile "" | cat > outfile_shell			command not found. Gera outfile
-
-----------------------------------------------------------------
-
-./pipex "infile" "tr Débor '  . '" "tr a '@'" "outfile0"
+./pipex "infile" "tr Débor '  . '" "tr a '@'" "outfile"
 < "infile" tr Débor "  .  "| tr a '@' > "outfile_shell"
+diff outfile outfile_shell 
 
+./pipex "infile" "tr b ' '" "tr a '@'" "outfile"
+< "infile" tr b ' '| tr a '@' > "outfile_shell"
+diff outfile outfile_shell 
 
-./pipex "infile" "tr b ' '" "tr a '@'" "outfile0"
-./pipex "infile" "   tr b ' '   " "   tr a '#'  " "outfile00"
+./pipex "infile" "   tr b ' '   " "   tr a '#'  " "outfile"
+< "infile"    tr b ' '   |    tr a '#'   > "outfile_shell"
+diff outfile outfile_shell 
 
+----------------------------------------------------------------
+SIMILAR ERROR:
 
-./pipex infile2 "grep Now" "wc -w" outfile1
-./pipex infile2 "grep Now" "head -2" outfile2
-./pipex infile2 "wc -w" "cat" outfile3
-./pipex infile "cat -n" "grep Talita" outfile4
-./pipex infile "cat" "wc -l" outfile5
-./pipex infile "cat" "cat" outfile6
-./pipex infilex "cat" "cat" outfile7
-./pipex infile "catt" "cat" outfile8
-./pipex infile "cat" "catt" outfile9
-./pipex infile "catt" "catt" outfile10
+./pipex infilex "cat" "cat" outfile
+./pipex infile "catt" "cat" outfile
+./pipex infile "cat" "catt" outfile
+./pipex infile "catt" "catt" outfile
 ./pipex infile "cat" "cat"
-./pipex infile "cat" outfile9
-./pipex infile outfile20
+./pipex infile "cat" outfile
+./pipex infile outfile
 
+./pipex infile "" "" outfile
+< infile "" | "" > outfile_shell	
+diff outfile outfile_shell 
 
+./pipex infile "cat" "" outfile	
+< infile "cat" | "" > outfile_shell	
+diff outfile outfile_shell 
 
+./pipex infile "" "cat" outfile
+< infile "" | cat > outfile_shell		
+diff outfile outfile_shell 
+
+----------------------------------------------------------------
+VALGRIND
 
 ## Use of valgrind:
 valgrind --leak-check=full --trace-children=yes ./pipex "infile" "tr b ' '" "tr a '@'" "outfile0"
@@ -53,48 +75,49 @@ valgrind --leak-check=full --show-leak-kinds=all --trace-children=yes -s ./pipex
 valgrind --leak-check=full --show-leak-kinds=all --trace-children=yes -s ./pipex infile "cat" "blah" outfile9
 valgrind --leak-check=full --trace-children=yes -s ./pipex infile "cat" "cat"
 
-
-
+----------------------------------------------------------------
 BONUS TESTES:
- ./pipex infile "cat" "cat" outfile 
- ./pipex infile "cat" "cat" cat cat outfile 
 
- ./pipex infile "tr 'abacaxi' 'o '" "tr 'o' 'a'" "tr a i" "tr ' ' &" "outfile"
- ./pipex infile "tr 'abacaxi' 'o'" "tr 'o' 'a'" "tr a i" "tr i %" "outfile"
+./pipex infile2 "grep Now" "head -2" "wc -l" outfile 
+< infile2 grep Now | head -2 | wc -l > outfile_shell
+diff outfile outfile_shell 
 
+./pipex infile2 "tr 'abacaxi' 'o '" "tr 'o' 'a'" "tr a i" "tr ' ' &" "outfile"
+< infile2 tr 'abacaxi' 'o '| tr 'o' 'a' | tr a i | tr ' ' \& > outfile_shell
+diff outfile outfile_shell 
 
-
-BONUS: trabalhar com muitos vazios... erro ou passa para próximo?
-
-
+./pipex infile "tr 'abacaxi' 'o'" "tr 'o' 'a'" "tr a i" "tr i %" "outfile"
+< infile tr 'abacaxi' 'o'| tr 'o' 'a' | tr a i | tr i % > outfile_shell
+diff outfile outfile_shell 
 
 ./pipex infile "cat" "grep 'abacaxi'" "tr ' a' 'x '" "grep 'x'" "tr ' ' 'l'" "grep 'l'" "wc -l" outfile
 < infile cat | grep 'abacaxi' | tr ' a' 'x ' | grep 'x' | tr ' ' 'l' | grep 'l' | wc -l > outfile_shell
+diff outfile outfile_shell 
 
 ./pipex infile "cat" "grep 'abacaxi'" "tr ' a' 'x '" "grep 'x'" "tr ' ' 'l'" "grep 'l'" outfile
 < infile cat | grep 'abacaxi' | tr ' a' 'x ' | grep 'x' | tr ' ' 'l' | grep 'l' > outfile_shell
+diff outfile outfile_shell 
 
-
+----------------------------------------------------------------
+ERROR
 
 ./pipex infile "cat" "grep 'abacaxi'" "" "grep 'x'" "tr ' ' 'l'" "" outfile
 < infile cat | grep 'abacaxi' | "" | grep 'x' | tr ' ' 'l' | "" > outfile_shell
+diff outfile outfile_shell 
 
+./pipex infile "" "" "tr a i" "tr i %" "outfile"
+< infile |  | tr a i | tr i % > outfile_shell
+diff outfile outfile_shell 
+----------------------------------------------------------------
+HERE DOC
+./pipex here_doc LIMITER cat "grep abacaxi" "tr a @" outfile 
+cat << LIMITER | grep abacaxi | tr a @ >> outfile_shell
+
+./pipex here_doc END "cat" "grep 'abacaxi'" "tr ' a' 'x '" "grep 'x'" "tr ' ' 'l'" "grep 'l'" outfile
+cat << END | grep abacaxi | tr ' a' 'x ' | grep 'x' | tr ' ' 'l' | grep 'l' >> outfile_shell
+
+valgrind --leak-check=full --trace-children=yes -s  ./pipex here_doc LIMITER cat cat outfile 
 
 !!!!!!!!!!!!!!!!
 BONUS AINDA NÃO TRATA here_doc com apenas um comando!!!
  ./pipex here_doc LIMITER cat outfile 
-
-
-Mas pega dois comandos!!!!
- ./pipex here_doc LIMITER cat cat outfile 
-
-
- ./pipex here_doc LIMITER "cat" "grep 'abacaxi'" "tr ' a' 'x '" "grep 'x'" "tr ' ' 'l'" "grep 'l'" outfile2
-
-
-
-Somente sai se linha == LIMITER
-cat << LIMITER | cat >> outfile_sheel
-
-valgrind --leak-check=full --trace-children=yes -s  ./pipex here_doc LIMITER cat cat outfile 
-
